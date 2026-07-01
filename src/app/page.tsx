@@ -1,65 +1,165 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { Section, SectionHeading } from "@/components/ui/section";
+import { Container } from "@/components/ui/container";
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
+import { Hero } from "@/components/sections/hero";
+import { StatsBand } from "@/components/sections/stats-band";
+import { ProcedureCard } from "@/components/sections/procedure-card";
+import { BeforeAfterSlider } from "@/components/sections/before-after-slider";
+import { WhyChoose } from "@/components/sections/why-choose";
+import { AboutTeaser } from "@/components/sections/about-teaser";
+import { TestimonialMarquee } from "@/components/sections/testimonials";
+import { FaqAccordion } from "@/components/sections/faq-accordion";
+import { BlogCard } from "@/components/sections/blog-card";
+import { CtaBand } from "@/components/sections/cta-band";
+import { procedures } from "@/content/procedures";
+import { beforeAfterCases } from "@/content/before-after";
+import { faqs } from "@/content/faqs";
+import { getAllPosts } from "@/lib/blog";
 
 export default function Home() {
+  const posts = getAllPosts().slice(0, 3);
+  const homeFaqs = faqs.slice(0, 6);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <>
+      <Hero />
+      <StatsBand />
+
+      {/* Procedures */}
+      <Section id="procedures">
+        <SectionHeading
+          eyebrow="What we treat"
+          title="Comprehensive oral & maxillofacial care"
+          description="From complex jaw reconstruction to confidence-restoring dental implants — explore the full range of procedures, each explained in clear, honest detail."
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+        <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {procedures.map((p) => (
+            <StaggerItem key={p.slug} className="h-full">
+              <ProcedureCard procedure={p} />
+            </StaggerItem>
+          ))}
+        </Stagger>
+        <div className="mt-12 flex justify-center">
+          <Button asChild size="lg" variant="outline">
+            <Link href="/procedures">
+              View all procedures
+              <ArrowRight />
+            </Link>
+          </Button>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+      </Section>
+
+      {/* Before / After */}
+      <section className="relative overflow-hidden bg-ink-950 py-20 text-white sm:py-28">
+        <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
+        <div className="pointer-events-none absolute -right-24 top-10 size-96 rounded-full bg-brand-600/20 blur-3xl" />
+        <Container className="relative">
+          <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="flex flex-col gap-6">
+              <SectionHeading
+                align="left"
+                tone="dark"
+                eyebrow="Before & after"
+                title="See the difference, side by side"
+                description="Drag the slider to reveal the transformation. These illustrative examples show the kind of change modern maxillofacial surgery can achieve."
+              />
+              <Reveal delay={0.15}>
+                <div className="rounded-2xl border border-white/10 bg-white/5 p-4 text-sm leading-relaxed text-ink-300">
+                  Images shown are neutral, AI/illustrated placeholders — no real
+                  patients — and will be replaced with consented case photos.
+                </div>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <Button asChild variant="glass" size="lg">
+                  <Link href="/before-after">
+                    Explore the full gallery
+                    <ArrowRight />
+                  </Link>
+                </Button>
+              </Reveal>
+            </div>
+            <Reveal direction="left">
+              <BeforeAfterSlider cases={beforeAfterCases} showCaption={false} />
+            </Reveal>
+          </div>
+        </Container>
+      </section>
+
+      <WhyChoose />
+      <AboutTeaser />
+
+      {/* Testimonials */}
+      <Section className="bg-ink-50" containerClassName="!max-w-none !px-0">
+        <Container>
+          <SectionHeading
+            eyebrow="Patient stories"
+            title="Trusted for results that change lives"
+            description="Real outcomes, real confidence. (Illustrative testimonials — to be replaced with consented patient feedback.)"
+          />
+        </Container>
+        <div className="mt-14">
+          <TestimonialMarquee />
+        </div>
+      </Section>
+
+      {/* FAQ */}
+      <Section>
+        <div className="grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+          <div className="lg:sticky lg:top-28 lg:self-start">
+            <SectionHeading
+              align="left"
+              eyebrow="Questions & answers"
+              title="You asked, we answered"
+              description="A few common questions to help you feel informed. Can't find what you need?"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Button asChild>
+                <Link href="/faq">
+                  All FAQs
+                  <ArrowRight />
+                </Link>
+              </Button>
+              <Button asChild variant="outline">
+                <Link href="/contact">Ask a question</Link>
+              </Button>
+            </div>
+          </div>
+          <Reveal direction="left">
+            <FaqAccordion items={homeFaqs} />
+          </Reveal>
         </div>
-      </main>
-    </div>
+      </Section>
+
+      {/* Blog */}
+      <Section className="bg-ink-50">
+        <div className="flex flex-col items-start justify-between gap-6 sm:flex-row sm:items-end">
+          <SectionHeading
+            align="left"
+            eyebrow="Patient education"
+            title="Insights & guides"
+            description="Clear, evidence-informed articles to help you make confident decisions about your care."
+          />
+          <Button asChild variant="outline" className="shrink-0">
+            <Link href="/blog">
+              Read the blog
+              <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+        <Stagger className="mt-12 grid gap-6 md:grid-cols-3">
+          {posts.map((post) => (
+            <StaggerItem key={post.slug} className="h-full">
+              <BlogCard post={post} />
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Section>
+
+      <CtaBand />
+    </>
   );
 }

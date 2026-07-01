@@ -1,26 +1,251 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Design tokens — Dr. Saloni Gupta OMFS
+  Direction: Modern & bold. Dark hero + light, airy sections.
+  Brand = deep teal/cyan (trust, clinical). Accent = warm coral (CTAs).
+*/
+@theme {
+  /* Brand — teal / cyan */
+  --color-brand-50: oklch(0.984 0.014 196);
+  --color-brand-100: oklch(0.956 0.035 196);
+  --color-brand-200: oklch(0.91 0.064 196);
+  --color-brand-300: oklch(0.852 0.092 195);
+  --color-brand-400: oklch(0.78 0.115 194);
+  --color-brand-500: oklch(0.704 0.13 193);
+  --color-brand-600: oklch(0.6 0.118 194);
+  --color-brand-700: oklch(0.5 0.098 196);
+  --color-brand-800: oklch(0.42 0.078 198);
+  --color-brand-900: oklch(0.36 0.06 200);
+  --color-brand-950: oklch(0.255 0.045 203);
+
+  /* Accent — warm coral */
+  --color-accent-50: oklch(0.971 0.018 25);
+  --color-accent-100: oklch(0.944 0.036 24);
+  --color-accent-200: oklch(0.897 0.07 22);
+  --color-accent-300: oklch(0.838 0.106 22);
+  --color-accent-400: oklch(0.765 0.15 23);
+  --color-accent-500: oklch(0.706 0.18 24);
+  --color-accent-600: oklch(0.638 0.196 26);
+  --color-accent-700: oklch(0.558 0.18 27);
+  --color-accent-800: oklch(0.476 0.15 28);
+  --color-accent-900: oklch(0.414 0.122 29);
+
+  /* Ink — deep slate for dark sections */
+  --color-ink-50: oklch(0.984 0.003 240);
+  --color-ink-100: oklch(0.968 0.005 240);
+  --color-ink-200: oklch(0.929 0.008 240);
+  --color-ink-300: oklch(0.869 0.012 240);
+  --color-ink-400: oklch(0.704 0.016 240);
+  --color-ink-500: oklch(0.554 0.018 240);
+  --color-ink-600: oklch(0.446 0.02 242);
+  --color-ink-700: oklch(0.372 0.022 244);
+  --color-ink-800: oklch(0.279 0.022 248);
+  --color-ink-900: oklch(0.208 0.021 252);
+  --color-ink-950: oklch(0.139 0.018 256);
+
+  /* Semantic */
+  --color-background: oklch(1 0 0);
+  --color-foreground: var(--color-ink-900);
+  --color-muted: var(--color-ink-100);
+  --color-muted-foreground: var(--color-ink-500);
+  --color-border: oklch(0.922 0.006 240);
+  --color-card: oklch(1 0 0);
+  --color-ring: var(--color-brand-500);
+
+  /* Fonts (wired via next/font CSS variables in layout) */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), var(--font-inter), ui-sans-serif, sans-serif;
+
+  /* Radii */
+  --radius-xl: 1rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* Easing + timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Animations */
+  --animate-marquee: marquee 40s linear infinite;
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-aurora: aurora 18s ease-in-out infinite alternate;
+  --animate-fade-in: fade-in 0.25s ease;
+  --animate-slide-in-right: slide-in-right 0.32s var(--ease-out-expo);
+  --animate-scale-in: scale-in 0.22s var(--ease-out-expo);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes acc-down {
+  from {
+    height: 0;
+    opacity: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+}
+
+@keyframes acc-up {
+  from {
+    height: var(--radix-accordion-content-height);
+    opacity: 1;
+  }
+  to {
+    height: 0;
+    opacity: 0;
+  }
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-14px);
+  }
+}
+
+@keyframes aurora {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
+  }
+  50% {
+    transform: translate3d(4%, -3%, 0) rotate(8deg) scale(1.1);
+  }
+  100% {
+    transform: translate3d(-3%, 4%, 0) rotate(-6deg) scale(1.05);
+  }
+}
+
+:root {
+  color-scheme: light;
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection */
+::selection {
+  background: var(--color-brand-200);
+  color: var(--color-ink-900);
+}
+
+/* Headings use the display font + tight tracking for a bold look */
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Thin, modern scrollbar */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-ink-300);
+    border-radius: 9999px;
+    border: 2px solid var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ink-400);
+  }
+}
+
+/* Utility: subtle grid backdrop for dark sections */
+.bg-grid {
+  background-image: linear-gradient(
+      to right,
+      color-mix(in oklch, white 6%, transparent) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      to bottom,
+      color-mix(in oklch, white 6%, transparent) 1px,
+      transparent 1px
+    );
+  background-size: 56px 56px;
+}
+
+/* Utility: text gradient */
+.text-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-brand-300),
+    var(--color-brand-500) 40%,
+    var(--color-accent-400)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Respect reduced motion globally */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

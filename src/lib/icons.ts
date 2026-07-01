@@ -1,0 +1,60 @@
+import {
+  Activity,
+  Anchor,
+  Award,
+  Bone,
+  Brain,
+  CalendarClock,
+  CheckCircle2,
+  ClipboardList,
+  Clock,
+  HeartPulse,
+  Hospital,
+  Layers,
+  type LucideIcon,
+  MapPin,
+  Microscope,
+  Phone,
+  Ruler,
+  ScanFace,
+  Shield,
+  ShieldPlus,
+  Smile,
+  Sparkles,
+  Stethoscope,
+  Syringe,
+  Users,
+} from "lucide-react";
+
+/** String → icon registry so content files can reference icons by name. */
+export const icons: Record<string, LucideIcon> = {
+  Activity,
+  Anchor,
+  Award,
+  Bone,
+  Brain,
+  CalendarClock,
+  CheckCircle2,
+  ClipboardList,
+  Clock,
+  HeartPulse,
+  Hospital,
+  Layers,
+  MapPin,
+  Microscope,
+  Phone,
+  Ruler,
+  ScanFace,
+  Shield,
+  ShieldPlus,
+  Smile,
+  Sparkles,
+  Stethoscope,
+  Syringe,
+  Users,
+};
+
+/** Resolve an icon by name, falling back to a neutral icon. */
+export function getIcon(name?: string): LucideIcon {
+  return (name && icons[name]) || Sparkles;
+}
