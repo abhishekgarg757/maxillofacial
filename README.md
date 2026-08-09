@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Dr. Saloni Gupta — Oral & Maxillofacial Surgery
 
-## Getting Started
+Production website for a Delhi-based oral & maxillofacial surgery practice.
+Built with **Next.js 16 (App Router)**, **React 19**, **TypeScript (strict)**,
+**Tailwind CSS v4**, and the **Vercel AI SDK** — content-driven, SEO-first, and
+healthcare-grade.
 
-First, run the development server:
+> ⚠️ This is an evolving site. Real clinic details (address, phone, email,
+> credentials, domain) are marked `TODO:` in `src/content/site.ts` and `doctor.ts` —
+> they must be filled in and reviewed before public launch. This is a Next.js 16
+> repo; its APIs differ from older Next.js training data. `AGENTS.md` is the
+> contract for anyone (human or AI) working here.
+
+---
+
+## Stack
+
+| Layer | Choice |
+|---|---|
+| Framework | Next.js 16.2.9 (App Router, RSC-first) |
+| UI | React 19, Tailwind v4 (`@theme` tokens), Radix primitives, `motion` |
+| Content | Typed TS in `src/content/` + MDX blog (`gray-matter`, `next-mdx-remote`) |
+| AI assistant | Vercel AI SDK + Google Gemini (`/api/chat`) |
+| Contact | Resend email API (`/api/contact`), Zod + rate-limit guarded |
+| Analytics | Vercel Analytics + SpeedInsights |
+| Quality | ESLint 9, `tsc --noEmit`, GitHub Actions CI |
+
+## Quick start
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # optional — the site degrades gracefully without it
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Scripts:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run lint       # ESLint
+npm run typecheck  # tsc --noEmit
+npm run check      # lint + typecheck
+npm run build      # production build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+src/
+  app/            # routes (App Router): pages + api/{chat,contact}
+  components/     # ui/ primitives · sections/ page blocks · layout/ · chat/ · motion/
+  content/        # typed content: site, procedures, faqs, testimonials, before-after, doctor + blog/*.mdx
+  lib/            # types.ts, utils.ts, jsonld.ts, contact-schema.ts, rate-limit.ts, icons.ts
+public/           # static placeholders (SVG) — real photos come later with consent
+.claude/          # AI operating system: agents/, skills/, commands/, settings.json (local, gitignored)
+.github/workflows/ # CI (lint + typecheck + build + secrets guard)
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Content model
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Content is **schema-driven** (types live in `src/lib/types.ts`), so it can
+later feed a CMS, appointments, calculators, multilingual (hi/en-IN), and email
+automation without rework.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **Site-wide facts / NAP** → `src/content/site.ts` (single source of truth).
+- **Procedures** → `src/content/procedures.ts` (rendered by `/procedures/[slug]`).
+- **Blog** → `src/content/blog/*.mdx` (frontmatter driven).
+- **FAQs / testimonials / before-after** → typed arrays in `src/content/`.
 
-## Deploy on Vercel
+**Rule:** adding content? Extend or use the interface in `src/lib/types.ts`
+first. Copy belongs in content files, never hardcoded in components.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Medical content policy
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. All medical copy is a **draft pending clinical review** by Dr. Gupta — no
+   AI workflow publishes without human sign-off.
+2. No diagnosis, no unverifiable precision, no invented statistics.
+3. Risks are presented alongside benefits; claims cite reputable sources
+   (AAOMS, Cleveland Clinic, Mayo, NHS, Johns Hopkins, NIDCR).
+4. Patient photos/testimonials require consent; current items are marked
+   illustrative placeholders.
+
+## AI operating system (`.claude/`)
+
+The repo is wired as a complete AI development environment for long-term,
+healthcare-safe development. It is fully documented in `AGENTS.md`.
+
+- **Agents** (`.claude/agents/`) — a cooperating pipeline:
+  `architect → seo-writer → nextjs-engineer → ui-designer → medical-content-reviewer →
+  accessibility/performance → code-reviewer → deployment-engineer`, plus
+  `assistant-guardian` for the AI chat.
+- **Skills** (`.claude/skills/`) — task knowledge: `project-conventions`
+  (the substrate), content/service/blog/SEO skills, audit skills, and
+  `production-readiness`.
+- **Commands** — slash commands for recurring work: `/new-procedure`,
+  `/doctor-blog`, `/generate-faq`, `/seo-audit`, `/review-ui`,
+  `/review-code`, `/review-accessibility`, `/review-performance`,
+  `/find-dead-code`, `/improve-copy`, `/improve-conversions`,
+  `/optimize-images`, `/prepare-release`, `/deployment-check`, and more.
+
+Audit helpers live in `.claude/scripts/` (`check.sh`, `audit-placeholders.sh`).
+
+## Deployment
+
+Vercel. The CI workflow runs lint + typecheck + build on every PR/push and
+guards against committing the local AI settings (`.claude/settings.json`).
+
+Env vars (see `.env.example`): `GOOGLE_GENERATIVE_AI_API_KEY`,
+`RESEND_API_KEY`, `CONTACT_TO_EMAIL`, optional `CONTACT_FROM_EMAIL`,
+`NEXT_PUBLIC_SITE_URL`.
+
+> Before first production launch: fill in real values in `src/content/site.ts`
+> and `doctor.ts`, obtain consent for any real patient content, and run
+> `/prepare-release`.

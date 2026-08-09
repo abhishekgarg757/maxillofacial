@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    name: Lint + typecheck + build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+  # Guard: refuse PRs that would leak the AI settings containing credentials.
+  secrets-scan:
+    name: Sealed settings files not committed
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Assert .claude/settings.json is ignored
+        run: |
+          if git check-ignore .claude/settings.json >/dev/null 2>&1; then
+            echo "OK: .claude/settings.json is gitignored"
+          else
+            echo "FAIL: .claude/settings.json is not gitignored" >&2
+            exit 1
+          fi
+          if git ls-files --error-unmatch .claude/settings.json >/dev/null 2>&1; then
+            echo "FAIL: .claude/settings.json is tracked in git" >&2
+            exit 1
+          fi
+          echo "OK: .claude/settings.json is not tracked by git"
