@@ -1,6 +1,6 @@
 ---
 name: ui-audit
-description: Visual/UX design audit for this clinic site. Use when reviewing a page's visual quality, hierarchy, consistency, and polish against the design system (tokens, spacing, motion, component reuse). For /review-ui. Complements accessibility-audit (inclusion) and performance-audit (speed).
+description: Visual/UX design audit for this clinic site. Use when reviewing a page's visual quality, hierarchy, consistency, and polish against the design system (tokens, spacing, motion, component reuse). For /audit ui. Complements accessibility-audit (inclusion) and performance-audit (speed).
 ---
 
 # UI Audit
@@ -13,7 +13,7 @@ Judge how a page *looks and feels* against the site's "modern & bold, dark hero
 ## When to use
 
 - After building/reworking a page or section.
-- User runs `/review-ui` on a target route.
+- User runs `/audit ui` on a target route.
 - Before a release to catch visual drift.
 
 ## Audit dimensions (code-grounded)

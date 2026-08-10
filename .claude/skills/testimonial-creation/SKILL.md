@@ -13,16 +13,18 @@ currently marks real vs illustrative explicitly (`Testimonial` objects).
 
 ## Workflow
 
-1. Load `project-conventions` + `content-model`. Read `src/content/testimonials.ts`
+1. Load `project-conventions` + `healthcare-content` (medical-drafting
+   guardrails) + `content-model`. Read `src/content/testimonials.ts`
    and `src/components/sections/testimonials.tsx` for the shape (`{ quote, author,
    context, rating }`) and how "illustrative" is surfaced.
 2. **Source vs generate**: prefer real, consented patient feedback when provided.
    If generating samples, they must be clearly marked as illustrative/in the
    existing spirit (see homepage callout "Illustrative testimonials — to be
    replaced with consented patient feedback").
-3. **Write believable, plain-language quotes**: specific-but-generic experiences
-   (procedure + outcome framing), no unverifiable results (success rates,
-   "my jaw healed in 2 weeks"), no diagnosis claims, no prices.
+3. **Write believable, plain-language quotes** per `healthcare-content`:
+   specific-but-generic experiences (procedure + outcome framing), no
+   unverifiable results (success rates, "my jaw healed in 2 weeks"), no
+   diagnosis claims, no prices.
 4. **Respect `context`** (e.g., "Orthognathic surgery patient") — map to real
    service lines; don't invent elaborate backstories.
 5. **Rating** consistent with tone — no 5/5 inflated where the copy is modest.

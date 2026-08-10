@@ -20,6 +20,10 @@ interface BeforeAfterSliderProps {
   className?: string;
 }
 
+// No-op subscription so useSyncExternalStore can detect the client-rendered
+// snapshot without a setState-in-effect (hydration-safe, lint-clean).
+const emptySubscribe = () => () => {};
+
 export function BeforeAfterSlider({
   cases,
   selectable = true,
@@ -28,10 +32,14 @@ export function BeforeAfterSlider({
 }: BeforeAfterSliderProps) {
   const [active, setActive] = React.useState(0);
   // react-compare-slider injects inline styles that differ between SSR and
-  // client, causing hydration warnings. Render it only after mount and show a
-  // matching static placeholder first (same aspect ratio) to avoid layout shift.
-  const [mounted, setMounted] = React.useState(false);
-  React.useEffect(() => setMounted(true), []);
+  // client, causing hydration warnings. Detect the client-rendered snapshot
+  // via useSyncExternalStore and show a matching static placeholder first
+  // (same aspect ratio) to avoid layout shift.
+  const mounted = React.useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
 
   const current = cases[active];
 

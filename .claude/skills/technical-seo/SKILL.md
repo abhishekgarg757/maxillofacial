@@ -1,6 +1,6 @@
 ---
 name: technical-seo
-description: Technical SEO audit and implementation for this Next.js 16 site — metadata, sitemap, robots, canonical, crawl/index signals, structured site anatomy. Use for SEO audits, new-route SEO wiring, metadata generation, and any /seo-audit work. Complements local-seo (local/GBP) and structured-data (schema).
+description: Technical SEO audit and implementation for this Next.js 16 site — metadata, sitemap, robots, canonical, crawl/index signals, structured site anatomy. Use for SEO audits, new-route SEO wiring, metadata generation, and any /audit seo work. Complements local-seo (local/GBP) and structured-data (schema).
 ---
 
 # Technical SEO
@@ -67,7 +67,7 @@ Health:
 
 ## Examples
 
-- **"/seo-audit whole site"** → iterate routes, apply the 10-point checklist,
+- **"/audit seo"** → iterate routes, apply the 10-point checklist,
   report ranked findings + fixes (dup titles, missing canonicals, sitemap gaps).
 - **Wire a new route's metadata** → per-page `metadata` consistent with layout
   template + add to sitemap + confirm in build output.

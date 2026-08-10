@@ -1,6 +1,6 @@
 ---
 name: production-readiness
-description: Release checklist and production-readiness verification for this clinic site. Use before any deploy (/prepare-release, /deployment-check) or when auditing readiness. Covers build, env, routes, SEO, consent, security toggles, and the human release plan. Execution agent: deployment-engineer.
+description: Release checklist and production-readiness verification for this clinic site. Use before any deploy (/production-check) or when auditing readiness. Covers build, env, routes, SEO, consent, security toggles, and the human release plan. Execution agent: deployment-engineer.
 ---
 
 # Production Readiness
@@ -66,7 +66,7 @@ For the deployment-engineer output: ordered steps for the human —
 
 ## Examples
 
-- **"/prepare-release"** → run gates 1–14, output the evidence table + the
+- **"/production-check pre"** → run gates 1–14, output the evidence table + the
   ordered human release plan + any blockers (e.g., "build fails: ..." or
   "consent TODO present").
-- **"/deployment-check"** → same checklist but release-lite (post-deploy hygiene).
+- **"/production-check post"** → same checklist but release-lite (post-deploy hygiene).

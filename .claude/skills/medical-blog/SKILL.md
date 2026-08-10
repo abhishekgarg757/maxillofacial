@@ -27,19 +27,20 @@ tags: ["…", …]
 
 ## Workflow
 
-1. Load `project-conventions` + `content-model`; read an existing post
+1. Load `project-conventions` + `healthcare-content` (medical-drafting
+   guardrails) + `content-model`; read an existing post
    (`src/content/blog/preparing-for-jaw-surgery.mdx`) for house style.
 2. **Pick a search-worthy topic** from the practice's service lines (jaw
    surgery, orthognathic, implants, trauma, TMJ, reconstruction) and patient
    questions. Long-tail "is X right for me" angles fit patients best.
-3. **Draft** with E-E-A-T and medical guardrails:
+3. **Draft** with E-E-A-T and the `healthcare-content` guardrails
+   (draft-first, no diagnosis, no unverifiable precision, risks beside
+   benefits, sourcing):
    - Author: Dr. Saloni Gupta; tone calm/plain; explain jargon.
-   - No diagnosis; always "every plan is tailored in consultation".
-   - No unverifiable precision — ranges and qualitative framing only.
+   - Always "every plan is tailored in consultation".
    - Cite reputable sources (AAOMS, Cleveland Clinic, Mayo, NHS, JHU, NIDCR)
      for clinical claims — inline links or a closing source list.
-   - Honest risk/content caveats; add `TODO: clinical review` if any
-     claim is new or unverified.
+   - Add `TODO: clinical review` if any claim is new or unverified.
 4. **Structure for reading**: intro → scannable `##` sections → FAQs/bullets →
    clear contact/consult CTA (WhatsApp via `whatsappUrl`, `/contact`).
 5. **Verify**: valid frontmatter (all fields), `next-mdx-remote`-compatible MDX

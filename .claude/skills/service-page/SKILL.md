@@ -15,16 +15,17 @@ are mostly *data + copy*, not new UI.
 
 ## Workflow
 
-1. **Load prerequisites:** `project-conventions` + `content-model`. Read
+1. **Load prerequisites:** `project-conventions` + `healthcare-content`
+   (medical-drafting guardrails) + `content-model`. Read
    `src/app/procedures/[slug]/page.tsx` to see exactly what fields render.
 2. **Choose an entry**: 
    - New service → add a full `Procedure` object (all fields incl. `recovery`,
      `sources`, `faqs`) to `src/content/procedures.ts`.
    - Existing service → edit/expand the relevant object.
-3. **Write healthcare-grade copy** (draft): follow medical guardrails
-   (no unverifiable precision, risks beside benefits, cite AAOMS/Cleveland/
-   Mayo/NHS/JHU/NIDCR in `sources`). Plain language. Add `TODO: clinical review`
-   markers for anything awaiting Dr. Gupta's sign-off.
+3. **Write healthcare-grade copy** (draft): apply the `healthcare-content`
+   guardrails — draft-first markers, no unverifiable precision, risks beside
+   benefits, sourcing in `sources`. Add `TODO: clinical review` markers for
+   anything awaiting Dr. Gupta's sign-off.
 4. **Update SEO if page content changed meaningfully**: the detail route's
    metadata and `src/lib/jsonld.ts` `medicalProcedureJsonLd` use the object —
    confirm description/summary read naturally as meta description.

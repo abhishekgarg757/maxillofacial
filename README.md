@@ -91,13 +91,27 @@ healthcare-safe development. It is fully documented in `AGENTS.md`.
 - **Skills** (`.claude/skills/`) — task knowledge: `project-conventions`
   (the substrate), content/service/blog/SEO skills, audit skills, and
   `production-readiness`.
-- **Commands** — slash commands for recurring work: `/new-procedure`,
-  `/doctor-blog`, `/generate-faq`, `/seo-audit`, `/review-ui`,
-  `/review-code`, `/review-accessibility`, `/review-performance`,
-  `/find-dead-code`, `/improve-copy`, `/improve-conversions`,
-  `/optimize-images`, `/prepare-release`, `/deployment-check`, and more.
+- **Commands** — slash commands for recurring work:
+  - **Pipeline:** `/feature "<business requirement>"` · `/page <route> [intent]`
+  - **Audit & release:** `/audit [route] [focus]` · `/production-check [pre|post]` · `/todo`
+  - **Content:** `/new-procedure` · `/doctor-blog` · `/generate-faq` · `/generate-testimonials`
+  - **Copy/CRO:** `/improve-copy` · `/improve-conversions`
+  - **Engineering:** `/create-component` · `/refactor-page` · `/find-dead-code` · `/review-code`
 
 Audit helpers live in `.claude/scripts/` (`check.sh`, `audit-placeholders.sh`).
+
+## AI orchestration model
+
+You describe **what** you want; Claude decides **how** and does the work:
+
+- `/feature "Create a Dental Implants service page optimized for local SEO and
+  conversions"` → Claude plans (for your approval), routes through architect →
+  seo-writer → medical gate → nextjs-engineer → ui-designer → parallel audits →
+  code review, and reports only what needs your decision.
+- `/todo` shows the two-track backlog in `TODO.md`: what Claude can build next
+  (Track A) and what's blocked on a human (Track B — NAP, credentials, patient
+  consent, pricing, clinical sign-off). Nothing ships, deploys, or is clinically
+  approved without a human.
 
 ## Deployment
 
@@ -110,4 +124,4 @@ Env vars (see `.env.example`): `GOOGLE_GENERATIVE_AI_API_KEY`,
 
 > Before first production launch: fill in real values in `src/content/site.ts`
 > and `doctor.ts`, obtain consent for any real patient content, and run
-> `/prepare-release`.
+> `/production-check pre`.

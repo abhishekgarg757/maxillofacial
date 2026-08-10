@@ -1,6 +1,6 @@
 ---
 name: accessibility-audit
-description: WCAG 2.2 AA accessibility audit for this clinic site — semantics, keyboard, focus, contrast, motion, forms, and ARIA. Use for /review-accessibility or before release. Produces file:line findings with concrete fixes. Complements ui-audit.
+description: WCAG 2.2 AA accessibility audit for this clinic site — semantics, keyboard, focus, contrast, motion, forms, and ARIA. Use for /audit a11y or before release. Produces file:line findings with concrete fixes. Complements ui-audit.
 ---
 
 # Accessibility Audit

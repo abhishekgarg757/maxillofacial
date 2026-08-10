@@ -40,19 +40,32 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | SEO | `src/lib/jsonld.ts`, `src/app/sitemap.ts`, `src/app/robots.ts` | Schema.org graph is centralized |
 | Types | `src/lib/types.ts` | All content is typed; extend, don't duplicate |
 | Site config | `src/content/site.ts` | NAP, hours, socials, nav — edit in one place |
+| Work tracking | `TODO.md` | Two-track: build backlog (Track A) + human-decision queue (Track B) |
 
 ---
 
 ## How to route work
 
+- **Orchestration** — the user describes **WHAT**; Claude decides **HOW**. Give
+  business requirements via `/feature "<requirement>"` (full pipeline) or
+  `/page <route>` (route-scoped). Run `/audit` after implementation,
+  `/production-check` before release, and `/todo` to see what's blocked on a
+  human. The `feature-pipeline` skill defines routing, gates, and stop points;
+  `TODO.md` is the two-track backlog + human-decision queue (Track A =
+  Claude-executable, Track B = human-only).
 - **Agents** (`.claude/agents/`) — specialized workers. Invoke one for any
-  non-trivial task instead of doing it ad hoc.
+  non-trivial task instead of doing it ad hoc. The orchestrator (main session)
+  selects and sequences them per the `feature-pipeline` skill.
 - **Skills** (`.claude/skills/`) — procedural knowledge: *how we do things in
   this codebase.* Load `project-conventions` plus the relevant domain skill
-  before starting a task. Skills define the "right way"; agents execute it.
-- **Commands** (`.claude/commands/`) — interactive entry points for recurring
-  requests (`/new-procedure`, `/review-code`, `/prepare-release`, …). Most are
-  thin wrappers that dispatch to an agent or skill.
+  before starting a task. Medical drafting always loads `healthcare-content`
+  (shared guardrails, not per-skill restatement).
+- **Commands** (`.claude/commands/`) — interactive entry points. Current set:
+  - **Pipeline:** `/feature <req>` · `/page <route> [intent]`
+  - **Audit & release:** `/audit [route] [focus]` · `/production-check [pre|post]` · `/todo`
+  - **Content:** `/new-procedure` · `/doctor-blog` · `/generate-faq` · `/generate-testimonials` · `/generate-metadata` · `/generate-schema`
+  - **Copy/CRO:** `/improve-copy` · `/improve-conversions`
+  - **Engineering:** `/create-component` · `/refactor-page` · `/find-dead-code` · `/review-code`
 
 ### The production pipeline
 
@@ -69,11 +82,15 @@ accessibility-reviewer & performance-reviewer ───────┤   (parall
                                                     human sign-off (Dr. Gupta / owner)
 ```
 
+This pipeline is **executable**: `/feature "<requirement>"` runs it end-to-end,
+stopping only at the upfront plan approval and at the hard stops below. `medical-content-reviewer`
+is a required gate **before** implementation, not after.
+
 - **Hand-offs are explicit.** The agent finishing a stage names the next agent
   and passes the baton in its final report.
 - **Parallelize freely** for independent audits (accessibility ∥ performance,
   UI review ∥ SEO review) — the pipeline is an order of dependencies, not a
-  suggestion to work serially.
+  suggestion to work serially. `/audit` runs them together.
 
 ### Never delegate
 
@@ -81,11 +98,14 @@ These are **always** human decisions. Route them back to the user; no agent,
 skill, or command may decide them:
 
 - Clinical sign-off on any medical content (claims, statistics, patient stories).
+  An agent marking something APPROVED means "safe as a draft" — **never**
+  clinically final. Sign-off is logged in `TODO.md` Track B by a human.
 - Anything touching real patient data, photos, consent, or PHI.
 - Sending real email / WhatsApp / booking confirmations to real people.
 - Merging, pushing, or deploying to production.
 - Creating or rotating credentials/secrets.
 - Choosing the clinic's real NAP values (address, phone, domain).
+- Pricing posture — what (if anything) is quoted online vs "estimate at consultation".
 
 ---
 

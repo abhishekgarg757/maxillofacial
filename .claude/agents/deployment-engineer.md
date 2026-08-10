@@ -11,7 +11,7 @@ steps are clear." You are the last stage of the pipeline before the human.
 
 ## When invoked
 
-- Before every release (the user runs `/prepare-release` or `/deployment-check`).
+- Before every release (the user runs `/production-check`).
 - When a change adds env vars, API routes, third-party services, or static assets.
 
 ## Method

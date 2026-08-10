@@ -1,6 +1,6 @@
 ---
 name: image-optimization
-description: Image optimization guidance for this clinic site — next/image usage, SVG placeholders, raster essentials, alt/consent for photos. Use when adding images, replacing placeholder art, or auditing image performance (/optimize-images). Coordinates with performance-audit (vitals) and accessibility (alt text).
+description: Image optimization guidance for this clinic site — next/image usage, SVG placeholders, raster essentials, alt/consent for photos. Use when adding images, replacing placeholder art, or auditing image performance (/audit perf). Coordinates with performance-audit (vitals) and accessibility (alt text).
 ---
 
 # Image Optimization
@@ -48,7 +48,7 @@ today; the skill covers both SVG hygiene and the real-photo path.
 1. Load `project-conventions` + `performance-audit`.
 2. For an image task: classify (placeholder vs real) → same rules → implement
    via `next/image` or keep inline-SVG.
-3. For `/optimize-images`: grep `public/` + `next/image` usage; report largest
+3. For `/audit perf`: grep `public/` + `next/image` usage; report largest
    bytes, missing dimensions, missing alt, consent gaps.
 
 ## Expected outputs
@@ -65,7 +65,7 @@ today; the skill covers both SVG hygiene and the real-photo path.
 
 ## Examples
 
-- **"/optimize-images"** → list `public/*.svg` sizes, audit `next/image` usage in
+- **"/audit perf"** → list `public/*.svg` sizes, audit `next/image` usage in
   Hero/BeforeAfterSlider for priority+dims, flag OG image gap; fix what's code-fixable.
 - **Swap doctor portrait** → keep `next/image` with proper dims + alt "Dr. Saloni
   Gupta" unless the actual file stays an inline svg.

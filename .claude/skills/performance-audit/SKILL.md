@@ -1,6 +1,6 @@
 ---
 name: performance-audit
-description: Core Web Vitals & performance audit for this Next.js 16 site — LCP/INP/CLS, images, bundle, fonts, render blocking, client/server split. Use for /review-performance or pre-release. Produces prioritized actionable findings. Complements ui-audit/accessibility-audit.
+description: Core Web Vitals & performance audit for this Next.js 16 site — LCP/INP/CLS, images, bundle, fonts, render blocking, client/server split. Use for /audit perf or pre-release. Produces prioritized actionable findings. Complements ui-audit/accessibility-audit.
 ---
 
 # Performance Audit

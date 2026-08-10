@@ -1,6 +1,6 @@
 ---
 name: landing-review
-description: Conversion-optimization review for marketing/landing pages of this clinic site — leads, trust signals, CTAs, friction, mobile intent. Use for /improve-conversions or /analyze-homepage. Healthcare-specific (trust + reduced anxiety matter more than aggressive CTAs).
+description: Conversion-optimization review for marketing/landing pages of this clinic site — leads, trust signals, CTAs, friction, mobile intent. Use for /improve-conversions or /audit /. Healthcare-specific (trust + reduced anxiety matter more than aggressive CTAs).
 ---
 
 # Landing Review

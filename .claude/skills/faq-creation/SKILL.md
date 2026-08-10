@@ -13,15 +13,16 @@ and any homepage accordion slices.
 
 ## Workflow
 
-1. Load `project-conventions` + `content-model`. Read `src/content/faqs.ts` for
-   the global shape (`FAQ`: question/answer/category) and `src/content/procedures.ts`
+1. Load `project-conventions` + `healthcare-content` (medical-drafting
+   guardrails) + `content-model`. Read `src/content/faqs.ts` for the global
+   shape (`FAQ`: question/answer/category) and `src/content/procedures.ts`
    for per-procedure `faqs`.
 2. **Collect real patient questions** — from service lines (cost, duration,
    anesthesia, recovery, risk, emergency) and the chat assistant's common asks.
-3. **Write answers** in house voice: short (2–4 sentences), plain, honest,
-   no diagnosis, no invented figures ("costs depend on the individual plan"),
-   route to consultation. Where clinically claiming something, it must be
-   general and well-established.
+3. **Write answers** per `healthcare-content`: short (2–4 sentences), plain,
+   honest, no diagnosis, no invented figures ("costs depend on the individual
+   plan"), route to consultation. Where clinically claiming something, it must
+   be general and well-established.
 4. **Group with `category`** for the FAQ page; keep a consistent, helpful order
    (top clinic logistics first, then treatment-specific).
 5. **SEO**: FAQ content feeds `faqJsonLd` (`src/lib/jsonld.ts`) — question
