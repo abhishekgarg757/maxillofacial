@@ -22,7 +22,7 @@ files, and audits automatically.
 - [ ] **Analytics segments** — CTA-click event tracking in Vercel Analytics (`/feature "Add conversion event tracking"`).
 - [ ] **Email automation** — post-consult follow-up nurture (`/feature "Set up post-consult email follow-up"`).
 - [ ] **Marketing / landing pages** — area- or condition-targeted (Gurgaon / Noida; "jaw surgery recovery") (`/feature "Create a Gurgaon-focused landing page"`).
-- [ ] **OG social image** — site-level `og:image` referenced by layout metadata (`/feature "Add an OG social image"`).
+- [x] **OG social image** — site-level `og:image` referenced by layout metadata (`/feature "Add an OG social image"`). *Done: `src/app/opengraph-image.png` + `opengraph-image.alt.txt` via `scripts/generate-og.mjs`.*
 - [ ] *(Add features here as you decide what to build next.)*
 
 ---
