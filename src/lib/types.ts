@@ -120,4 +120,76 @@ export interface SiteConfig {
   nav: NavLink[];
 }
 
+export interface Certification {
+  /** Course or program title. */
+  title: string;
+  /** Issuing body or institution. */
+  issuingBody: string;
+  /** Year of completion (optional). */
+  year?: string;
+  /** Path to certificate photograph or scan (optional). */
+  certificateImage?: string;
+  /** Brief note about what was covered (optional). */
+  description?: string;
+}
+
+/** Doctor profile extended with aesthetic-specific training. */
+export interface ExtendedDoctor {
+  /** Existing doctor data (merge with src/content/doctor.ts fields). */
+  name: string;
+  credentials: string;
+  role: string;
+  location: string;
+  portrait: string;
+  intro: string;
+  philosophy: Array<{
+    title: string;
+    body: string;
+    icon: string;
+  }>;
+  timeline: Array<{
+    year: string;
+    title: string;
+    detail: string;
+  }>;
+  memberships: string[];
+  /** Aesthetic medicine courses completed. */
+  aestheticCertifications: Certification[];
+  /** Photographs from training events (optional). */
+  trainingPhotos: string[];
+  /** Philosophy paragraph for aesthetic narrative (optional). */
+  aestheticPhilosophy?: string;
+}
+
+export interface AestheticTreatmentSection {
+  heading: string;
+  body: string;
+  points?: string[];
+}
+
+export interface AestheticTreatment {
+  /** URL-safe slug, e.g. "hydrafacial", "botox", "thread-lift" */
+  slug: string;
+  displayTitle: string;
+  tagline: string;
+  summary: string;
+  category: "facials" | "injectables" | "regenerative";
+  sections: AestheticTreatmentSection[];
+  indications: string[];
+  benefits: string[];
+  risks: string[];
+  /** Session length, e.g. "30–60 minutes" */
+  treatmentDuration?: string;
+  /** Time before normal activities resume */
+  downtime?: string;
+  /** How long results typically last */
+  longevity?: string;
+  /** Setting/approach, e.g. "In-clinic, no anaesthesia required" */
+  sessionType?: string;
+  faqs: FAQ[];
+  sources: Source[];
+  /** Path to hero/treatment photograph */
+  heroImage?: string;
+}
+
 export type IconMap = Record<string, LucideIcon>;

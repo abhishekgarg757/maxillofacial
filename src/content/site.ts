@@ -50,6 +50,7 @@ export const site: SiteConfig = {
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Procedures", href: "/procedures" },
+    { label: "Aesthetic", href: "/aesthetic" },
     { label: "Before & After", href: "/before-after" },
     { label: "Testimonials", href: "/testimonials" },
     { label: "Blog", href: "/blog" },
