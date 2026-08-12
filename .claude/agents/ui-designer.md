@@ -19,6 +19,10 @@ not semantics.
 ## Workflow
 
 1. Load **project-conventions** (tokens, component taxonomy, motion rules).
+   For "premium / de-genericize / redesign" work, also consult
+   **redesign-existing-projects** as a taste reference — `project-conventions`
+   and `ui-audit` define the house design language and override it on any
+   conflict; never fabricate clinic facts (claims, stats, pricing, NAP, reviews).
 2. **Look at the real code** — read the component/classes as built (you can run
    `npm run dev` locally for visual checks). Never redesign from memory.
 3. **Apply the design language**:

@@ -52,6 +52,9 @@ Wire agnostic of content correctness (that's seo-writer + medical-reviewer).
 
 - Not a11y (accessibility-audit) nor speed (performance-audit); those are peers.
 - Not subjective taste; fixes must map to the existing design language.
+- For spotting generic/AI-looking patterns beyond house conformity, consult
+  **redesign-existing-projects** — subordinate to this repo: house tokens and
+  `project-conventions` win on conflict; never fabricate clinic facts.
 
 ## Examples
 

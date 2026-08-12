@@ -60,6 +60,14 @@ This version has breaking changes — APIs, conventions, and file structure may 
   this codebase.* Load `project-conventions` plus the relevant domain skill
   before starting a task. Medical drafting always loads `healthcare-content`
   (shared guardrails, not per-skill restatement).
+  - **`redesign-existing-projects`** — generic premium-design reference for
+    explicitly-invoked "redesign / de-genericize" work only; never auto-loaded
+    by `/feature`, `/page`, or `/audit`. It is subordinate to the house design
+    language: `project-conventions` and `ui-audit` define that language and
+    override it on any conflict. Its guidance to fabricate realistic content or
+    data is **disabled** here — never invent medical claims, statistics,
+    pricing, phone numbers, credentials, reviews, patient results, NAP, or other
+    clinic facts.
 - **Commands** (`.claude/commands/`) — interactive entry points. Current set:
   - **Pipeline:** `/feature <req>` · `/page <route> [intent]`
   - **Audit & release:** `/audit [route] [focus]` · `/production-check [pre|post]` · `/todo`

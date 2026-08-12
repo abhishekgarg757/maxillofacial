@@ -47,6 +47,9 @@ website. You design the *shape* of a change, never the finished implementation.
 - Consult with **seo-writer** on information architecture; **ui-designer** on
   layout feasibility; **deployment-engineer** if the change needs new env vars,
   images, or third-party services.
+- When scoping an explicitly-requested "redesign / de-genericize" change, load
+  **redesign-existing-projects** for the diagnosis framework — subordinate to
+  `project-conventions`, and its content-fabrication guidance is disabled here.
 
 ## Never
 
