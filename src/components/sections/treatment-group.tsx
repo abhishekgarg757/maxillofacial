@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
+
+import { ImageSlot } from "@/components/ui/image-slot";
 
 interface TreatmentGroupItem {
   slug: string;
@@ -20,71 +21,64 @@ interface TreatmentGroupProps {
 }
 
 /**
- * Section 7: Regenerative Treatments — Grouped Presentation
- * Three equal-width tiles showing grouped treatments as a cohesive set.
- * Symmetric layout signals shared DNA (unlike asymmetry in injectables section).
+ * Section 7: Regenerative Treatments — editorial chapter
+ * Portrait tiles that link to in-page treatment anchors. If specific
+ * treatments are not yet confirmed in content, shows an honest placeholder
+ * instead of inventing offerings.
  */
-export function TreatmentGroup({ title, description, treatments }: TreatmentGroupProps) {
+export function TreatmentGroup({
+  title,
+  description,
+  treatments,
+}: TreatmentGroupProps) {
   return (
-    <section className="py-20 sm:py-28 lg:py-32 xl:py-36">
+    <section
+      id="regenerative"
+      className="scroll-mt-24 bg-paper py-20 sm:py-28 lg:py-32 xl:py-36"
+    >
       <div className="mx-auto px-5 sm:px-8 lg:max-w-7xl">
-        {/* Heading */}
-        <h2 className="text-balance text-3xl font-bold leading-[1.08] tracking-tight text-ink-900 sm:text-4xl md:text-5xl">
-          {title}
-        </h2>
-
-        {/* Description */}
-        <p className="mt-4 max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-          {description}
+        <p className="font-aesthetic text-sm italic text-clay-600">
+          Chapter 03 · Regenerative
         </p>
 
-        {/* Equal-width treatment tiles */}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {treatments.map((t) => (
-            <TreatmentCard key={t.slug} {...t} />
-          ))}
+        <div className="mt-3 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="text-balance text-3xl font-bold leading-[1.08] tracking-tight text-ink-900 sm:text-4xl md:text-5xl">
+            {title}
+          </h2>
+          <p className="max-w-md text-base leading-relaxed text-ink-600">
+            {description}
+          </p>
         </div>
+
+        {treatments.length > 0 ? (
+          <ul className="mt-12 grid gap-x-5 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+            {treatments.map((t) => (
+              <li key={t.slug}>
+                <Link href={`#${t.slug}`} className="group block">
+                  <ImageSlot
+                    src={t.imageSrc}
+                    alt={t.imageAlt ?? ""}
+                    label={t.title}
+                    ratio="4 / 5"
+                    className="transition-transform duration-500 group-hover:scale-[1.02]"
+                  />
+                  <span className="mt-3 block text-lg font-bold text-ink-900 group-hover:text-clay-700">
+                    {t.title}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <div className="mt-12 rounded-sm border border-dashed border-ink-900/20 bg-paper-deep p-8">
+            <p className="max-w-2xl text-sm leading-relaxed text-ink-600">
+              [CLINICAL REVIEW REQUIRED] — The specific regenerative treatments
+              offered are being finalised by Dr. Gupta. Details will be added
+              here once confirmed.
+            </p>
+          </div>
+        )}
       </div>
     </section>
-  );
-}
-
-function TreatmentCard({ slug, title, imageSrc, imageAlt }: TreatmentGroupItem) {
-  const showImage = !!imageSrc && !imageSrc.startsWith("/placeholder");
-  const isPlaceholder = imageSrc && imageSrc.startsWith("/placeholder");
-
-  return (
-    <Link
-      href={`/aesthetic/regenerative#${slug}`}
-      className="group block overflow-hidden rounded-sm transition-shadow duration-300 hover:shadow-lg"
-      aria-label={`${title} — click to learn more`}
-    >
-      {showImage ? (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
-          src={imageSrc}
-          alt={imageAlt ?? ""}
-          className="h-[240px] w-full object-cover transition-transform duration-500 ease-out-expo group-hover:scale-[1.03]"
-          style={{ aspectRatio: "4 / 5" }}
-        />
-      ) : isPlaceholder ? (
-        <PhotoPlaceholder
-          label={title}
-          note={`Treatment photo — ${title}`}
-          ratio="4 / 5"
-          className="h-[240px] w-full bg-ink-900"
-        />
-      ) : null}
-
-      {/* Title below image */}
-      <div className="bg-background p-5">
-        <span className="text-sm font-semibold text-ink-900 group-hover:text-brand-700">
-          {title}
-        </span>
-        <span className="mt-1 inline-block text-xs text-brand-700 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-          Learn more →
-        </span>
-      </div>
-    </Link>
   );
 }

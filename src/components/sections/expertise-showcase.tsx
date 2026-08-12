@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
+
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { ImageSlot } from "@/components/ui/image-slot";
 import { CertificateGallery } from "./certificate-gallery";
 
 interface CertificationEntry {
@@ -9,6 +9,12 @@ interface CertificationEntry {
   institution: string;
   year?: string;
   description?: string;
+}
+
+interface TimelineEntry {
+  year: string;
+  title: string;
+  detail: string;
 }
 
 interface ExpertiseShowcaseProps {
@@ -24,16 +30,17 @@ interface ExpertiseShowcaseProps {
   narrative: string;
   /** Aesthetic certifications completed (placeholder list if real data not yet provided). */
   certifications: CertificationEntry[];
+  /** Doctor's training timeline (education → specialist → consultant). */
+  timeline?: TimelineEntry[];
   /** Paths to certificate images (empty = using placeholders). */
   certificates: Array<{ src?: string; alt: string; title: string }>;
 }
 
 /**
- * Section 9: Doctor Expertise — Training & Certification
- * Visual showcase of doctor's aesthetic-specific training.
- *
- * Desktop: large portrait photo left + training narrative right + certificate thumbnails below.
- * Mobile: stacked — portrait first, then text, then certificates.
+ * Section 9: The Surgeon — trust centerpiece
+ * Editorial spread: sticky portrait image slot, narrative, numbered training
+ * timeline, aesthetic-training list (placeholders preserved), and CTAs.
+ * The surgical credential is the anchor of the trust story.
  */
 export function ExpertiseShowcase({
   doctorName,
@@ -42,69 +49,89 @@ export function ExpertiseShowcase({
   portraitAlt,
   narrative,
   certifications,
+  timeline = [],
   certificates,
 }: ExpertiseShowcaseProps) {
-  const showImage = !!portraitSrc && !portraitSrc.startsWith("/placeholder");
-  const isPlaceholder = portraitSrc && portraitSrc.startsWith("/placeholder");
-
   return (
-    <section className="py-20 sm:py-28 lg:py-32 xl:py-36">
+    <section className="bg-paper py-20 sm:py-28 lg:py-32 xl:py-36">
       <div className="mx-auto px-5 sm:px-8 lg:max-w-7xl">
-        {/* Heading */}
-        <h2 className="text-balance text-3xl font-bold leading-[1.08] tracking-tight text-ink-900 sm:text-4xl md:text-5xl">
+        <p className="font-aesthetic text-sm italic text-clay-600">
+          The surgeon behind the work
+        </p>
+        <h2 className="mt-3 max-w-3xl text-balance text-3xl font-bold leading-[1.08] tracking-tight text-ink-900 sm:text-4xl md:text-5xl">
           Where Surgical Training Meets Aesthetic Precision
         </h2>
-        <p className="mt-2 text-xs font-semibold uppercase tracking-[0.12em] text-brand-700">
+        <p className="mt-3 font-aesthetic text-sm italic text-ink-600">
           {doctorName} · {credential}
         </p>
 
-        <div className="mt-12 grid items-start gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-12">
-          {/* Left: Portrait image */}
+        <div className="mt-12 grid items-start gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          {/* Portrait — sticky */}
           <div className="lg:sticky lg:top-28">
-            {showImage ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={portraitSrc}
-                alt={portraitAlt}
-                className="w-full rounded-sm object-cover"
-                style={{ aspectRatio: "4 / 5" }}
-              />
-            ) : isPlaceholder ? (
-              <PhotoPlaceholder
-                label="Doctor at-work photography required"
-                note="Candid shot of Dr. Gupta performing or consulting for an aesthetic treatment"
-                ratio="4 / 5"
-                className="w-full rounded-sm bg-ink-900"
-              />
-            ) : null}
+            <ImageSlot
+              src={portraitSrc}
+              alt={portraitAlt}
+              label="Dr. Saloni Gupta"
+              ratio="4 / 5"
+            />
           </div>
 
-          {/* Right: Narrative + certifications */}
-          <div className="flex flex-col gap-8">
-            {/* Philosophy paragraph */}
-            <p className="text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
+          {/* Narrative + credentials */}
+          <div className="flex flex-col gap-10">
+            <p className="text-pretty text-base leading-relaxed text-ink-600 sm:text-lg">
               {narrative}
             </p>
 
+            {/* Training timeline — numbered */}
+            {timeline.length > 0 && (
+              <div>
+                <h3 className="font-aesthetic text-lg italic text-clay-600">
+                  Training &amp; credentials
+                </h3>
+                <ol className="mt-5 border-t border-ink-900/10">
+                  {timeline.map((t, i) => (
+                    <li
+                      key={`${t.year}-${i}`}
+                      className="grid grid-cols-[auto_1fr] gap-5 border-b border-ink-900/10 py-4"
+                    >
+                      <span
+                        aria-hidden="true"
+                        className="font-aesthetic text-2xl italic text-clay-500"
+                      >
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <div>
+                        <p className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-600">
+                          {t.year}
+                        </p>
+                        <p className="mt-1 font-semibold text-ink-900">
+                          {t.title}
+                        </p>
+                        <p className="mt-1 text-sm leading-relaxed text-ink-600">
+                          {t.detail}
+                        </p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            )}
+
             {/* Aesthetic training listing */}
             <div>
-              <Badge>Aesthetic Training</Badge>
-              <h3 className="mt-4 text-xl font-bold tracking-tight text-ink-900">
-                Advanced Clinical Training
+              <h3 className="font-aesthetic text-lg italic text-clay-600">
+                Aesthetic training
               </h3>
-
-              <dl className="mt-5 space-y-5">
+              <dl className="mt-5 border-t border-ink-900/10">
                 {certifications.map((c, i) => (
-                  <div key={i}>
-                    <dt className="font-display text-base font-semibold text-ink-900">
-                      {c.title}
-                    </dt>
-                    <dd className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-muted-foreground">
-                      <span>{c.institution}</span>
+                  <div key={i} className="border-b border-ink-900/10 py-4">
+                    <dt className="font-semibold text-ink-900">{c.title}</dt>
+                    <dd className="mt-0.5 text-sm text-ink-600">
+                      {c.institution}
                       {c.year && (
                         <>
-                          <span aria-hidden="true">&middot;</span>
-                          <span>{c.year}</span>
+                          {" "}
+                          <span aria-hidden="true">·</span> {c.year}
                         </>
                       )}
                     </dd>
@@ -119,18 +146,19 @@ export function ExpertiseShowcase({
 
               {/* Clear placeholder indicator when no real data */}
               {certifications.length === 0 && (
-                <p className="mt-3 text-xs italic text-muted-foreground">
-                  Aesthetic course details pending doctor input [CLINICAL REVIEW REQUIRED]
+                <p className="mt-3 text-xs italic text-ink-600">
+                  Aesthetic course details pending doctor input [CLINICAL
+                  REVIEW REQUIRED]
                 </p>
               )}
             </div>
 
             {/* CTAs */}
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Button asChild variant="accent">
+            <div className="flex flex-wrap gap-3">
+              <Button asChild variant="clay" size="lg">
                 <Link href="/contact">Schedule a consultation</Link>
               </Button>
-              <Button asChild variant="outline">
+              <Button asChild variant="outline" size="lg">
                 <Link href="/about">More about Dr. Gupta</Link>
               </Button>
             </div>
@@ -138,7 +166,9 @@ export function ExpertiseShowcase({
         </div>
 
         {/* Certificate gallery strip */}
-        <CertificateGallery certificates={certificates} />
+        <div>
+          <CertificateGallery certificates={certificates} />
+        </div>
       </div>
     </section>
   );

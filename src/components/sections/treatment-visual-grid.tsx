@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
+import { ImageSlot } from "@/components/ui/image-slot";
 
 interface TreatmentTile {
   slug: string;
@@ -20,20 +20,23 @@ interface TreatmentVisualGridProps {
 }
 
 /**
- * Section 5: Facial Treatments Visual Navigation (CRITICAL)
- * Masonry-style asymmetric image grid where photography IS navigation.
- * Each tile is a clickable link to the treatment detail.
- * Hover states confirm interactivity without breaking the premium feel.
+ * Section 5: Facial Treatments — Visual Navigation
+ * Asymmetric masonry grid where photography IS navigation. Each tile links to
+ * the `#facials` chapter (the section itself), keeping discovery on-page.
+ * Tiles use editorial image slots; title chips overlay so the treatment name
+ * reads on any image.
  *
  * Desktop: asymmetric grid mixing standard, wide, and tall tiles.
- * Mobile: full-width vertical stack, portrait-oriented.
+ * Mobile: 2-column compact grid.
  */
 export function TreatmentVisualGrid({ treatments }: TreatmentVisualGridProps) {
-  // Define explicit spans for each treatment to create editorial asymmetry
+  // Explicit spans create editorial asymmetry. Seven portrait tiles with a
+  // single 2-column lead tile fill exactly two full 4-column rows (a tall
+  // tile would leave the 7th orphaned in a lopsided final row).
   const layout = [
-    { colSpan: 2 as const, rowSpan: 1 }, // Hydrafacial — prominent
+    { colSpan: 2 as const, rowSpan: 1 }, // Hydrafacial — prominent lead
     { colSpan: 1, rowSpan: 1 },
-    { colSpan: 1, rowSpan: 2 },        // Radiance Revival — tall focal point
+    { colSpan: 1, rowSpan: 1 },
     { colSpan: 1, rowSpan: 1 },
     { colSpan: 1, rowSpan: 1 },
     { colSpan: 1, rowSpan: 1 },
@@ -41,20 +44,28 @@ export function TreatmentVisualGrid({ treatments }: TreatmentVisualGridProps) {
   ];
 
   return (
-    <section className="py-20 sm:py-28 lg:py-32 xl:py-36">
+    <section
+      id="facials"
+      className="scroll-mt-24 bg-paper py-20 sm:py-28 lg:py-32 xl:py-36"
+    >
       <div className="mx-auto px-5 sm:px-8 lg:max-w-7xl">
-        {/* Section heading — left-aligned, minimal */}
-        <h2 className="text-balance text-3xl font-bold leading-[1.08] tracking-tight text-ink-900 sm:text-4xl md:text-5xl lg:max-w-xl">
-          Facials &amp; Skin Rejuvenation
-        </h2>
-        <p className="mt-4 max-w-md text-base leading-relaxed text-muted-foreground sm:text-lg">
-          Click any treatment below to learn more about the procedure, what to expect, and whether it suits your skin.
+        <p className="font-aesthetic text-sm italic text-clay-600">
+          Chapter 01 · Facials &amp; Skin
         </p>
 
-        {/* Masonry grid */}
+        <div className="mt-3 flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+          <h2 className="text-balance text-3xl font-bold leading-[1.08] tracking-tight text-ink-900 sm:text-4xl md:text-5xl">
+            Facials &amp; Skin Rejuvenation
+          </h2>
+          <p className="max-w-md text-base leading-relaxed text-ink-600">
+            A visual directory of facial treatments — from deep hydration to
+            texture refinement, each tailored to your skin during consultation.
+          </p>
+        </div>
+
         <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4 lg:gap-5">
           {treatments.map((t, i) => {
-            const span = layout[i];
+            const span = layout[i] ?? { colSpan: 1, rowSpan: 1 };
             return (
               <TreatmentTile
                 key={t.slug}
@@ -67,17 +78,18 @@ export function TreatmentVisualGrid({ treatments }: TreatmentVisualGridProps) {
         </div>
 
         {/* Compact text index — quick scan of all treatments on mobile */}
-        <p className="mt-8 pt-6 text-center text-xs text-muted-foreground sm:hidden">
+        <p className="mt-8 pt-6 text-center text-xs text-ink-600 sm:hidden">
           All treatments:{" "}
-          {treatments.map((t) => (
-            <Link
-              key={t.slug}
-              href={`/aesthetic/facials#${t.slug}`}
-              className="inline-flex items-center gap-1 text-brand-700 underline decoration-brand-200 underline-offset-2 hover:text-brand-900"
-            >
-              {t.title}
-              {treatments.indexOf(t) < treatments.length - 1 ? "," : ""}
-            </Link>
+          {treatments.map((t, i) => (
+            <span key={t.slug}>
+              {i > 0 && <span aria-hidden="true">, </span>}
+              <Link
+                href="#facials"
+                className="text-clay-600 underline decoration-clay-300 underline-offset-2 hover:text-clay-700"
+              >
+                {t.title}
+              </Link>
+            </span>
           ))}
         </p>
       </div>
@@ -86,66 +98,36 @@ export function TreatmentVisualGrid({ treatments }: TreatmentVisualGridProps) {
 }
 
 function TreatmentTile({
-  slug,
   title,
   imageSrc,
   imageAlt,
   colSpan = 1,
   rowSpan = 1,
 }: TreatmentTile & { colSpan?: number; rowSpan?: number }) {
-  const isPlaceholder = imageSrc.startsWith("/placeholder") || !imageSrc;
-
-  // Build CSS grid span classes based on config
-  const gridClasses = `col-span-${colSpan} row-span-${rowSpan}`;
-
   return (
     <Link
-      href={`/aesthetic/facials#${slug}`}
+      href="#facials"
       className={cn(
-        "group relative block overflow-hidden rounded-sm",
+        "group relative block",
         colSpan > 1 && "lg:col-span-2",
         rowSpan > 1 && "lg:row-span-2",
-        gridClasses,
       )}
-      aria-label={`${title} — click to learn more`}
+      aria-label={`${title} — part of Facials & Skin treatments`}
     >
-      {isPlaceholder ? (
-        <PhotoPlaceholder
-          label={title}
-          note={`Treatment photo — ${title}`}
-          ratio="4 / 5"
-          className="h-full w-full"
-        />
-      ) : (
-        /* eslint-disable-next-line @next/next/no-img-element */
-        <img
-          src={imageSrc}
-          alt={imageAlt}
-          className="h-full w-full object-cover transition-transform duration-500 ease-out-expo group-hover:scale-[1.03]"
-          style={{ aspectRatio: "4 / 5" }}
-        />
-      )}
+      <ImageSlot
+        src={imageSrc}
+        alt={imageAlt}
+        label=""
+        ratio="4 / 5"
+        className="h-full w-full transition-transform duration-500 group-hover:scale-[1.02]"
+      />
 
-      {/* Bottom gradient bar for text contrast */}
-      <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-ink-950/70 to-transparent" />
-
-      {/* Title overlaid at bottom-left */}
-      <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5">
-        <span className="text-sm font-semibold text-white">{title}</span>
-      </div>
-
-      {/* Hover indicator — fades in arrow */}
-      <div className="pointer-events-none absolute right-3 top-3 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <svg
-          className="size-5 text-white/80"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-          strokeWidth={2}
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-        </svg>
-      </div>
+      {/* Title chip — readable over any image */}
+      <span className="absolute inset-x-0 bottom-0 p-3 sm:p-4">
+        <span className="inline-block bg-paper/90 px-3 py-1.5 text-xs font-semibold text-ink-900 backdrop-blur-sm transition-colors group-hover:text-clay-700">
+          {title}
+        </span>
+      </span>
     </Link>
   );
 }

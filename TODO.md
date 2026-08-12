@@ -42,6 +42,7 @@ never via an agent.
 
 - [ ] **Consented testimonials** — replace the 6 illustrative entries in `src/content/testimonials.ts` with real, written-consent patient feedback.
 - [ ] **Consented before/after photos** — replace placeholder SVGs in `/public/before-after/*` with consented clinical photos (or commissioned AI faces).
+- [ ] **`/aesthetic` "Real Results" framing** — `BeforeAfterPreview` currently reuses `beforeAfterCases[0]` (a surgical case) as an aesthetic illustration. Confirm the framing is honest and consent covers that use, or remove it until a dedicated aesthetic case exists.
 
 ### Local SEO (off-site, human-executed)
 
@@ -61,3 +62,7 @@ Artifacts Dr. Gupta has approved. Agents gate *quality*; only humans mark *appro
 | `blog/*.mdx` (3 posts) | needs-human | — | — |
 | `faqs.ts` | needs-human | — | — |
 | `chat-system-prompt.ts` | needs-human | — | — |
+| `/aesthetic` page narrative + quick facts (all `[CLINICAL REVIEW REQUIRED]`) | needs-human | — | — |
+| `aesthetic-treatments.ts` (treatment list) | needs-human | — | — |
+| `/aesthetic` expertise credential claims ("advanced training in aesthetic medicine") | needs-human | — | — |
+| `/aesthetic` hero subtitle + trust-strip positioning claims ("surgical-grade anatomical knowledge", "Evidence-Based Approach") | needs-human | — | — |

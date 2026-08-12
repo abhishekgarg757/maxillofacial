@@ -92,7 +92,7 @@ export function BeforeAfterSlider({
       </figure>
 
       {showCaption ? (
-        <figcaption className="text-sm text-muted-foreground">
+        <figcaption className="text-sm text-ink-600">
           <span className="font-semibold text-ink-800">{current.title}.</span>{" "}
           {current.note}
         </figcaption>

@@ -56,9 +56,18 @@
   --color-card: oklch(1 0 0);
   --color-ring: var(--color-brand-500);
 
+  /* Aesthetic page — editorial identity (warm paper canvas + terracotta) */
+  --color-paper: oklch(0.976 0.01 85);
+  --color-paper-deep: oklch(0.952 0.014 85);
+  --color-clay-300: oklch(0.804 0.096 42);
+  --color-clay-500: oklch(0.628 0.138 42);
+  --color-clay-600: oklch(0.552 0.148 42);
+  --color-clay-700: oklch(0.47 0.13 42);
+
   /* Fonts (wired via next/font CSS variables in layout) */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-display), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-aesthetic: var(--font-fraunces), Georgia, ui-serif, serif;
 
   /* Radii */
   --radius-xl: 1rem;
@@ -248,4 +257,12 @@ h4 {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
+}
+
+/* Before/after slider handle — restore a visible keyboard focus ring.
+   react-compare-slider sets inline `outline: 0` on its focusable root
+   (`[data-rcs="handle-root"]`), which removes the focus indicator. */
+[data-rcs="handle-root"]:focus-visible {
+  outline: 3px solid var(--color-brand-500) !important;
+  outline-offset: 2px;
 }

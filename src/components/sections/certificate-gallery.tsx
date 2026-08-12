@@ -14,15 +14,15 @@ interface CertificateGalleryProps {
 /**
  * Section 9 sub-component: Certificate Gallery
  * Horizontal scroll row of certificate thumbnails.
- * Each thumbnail is clickable to enlarge.
- * Uses PhotoPlaceholder when real certificate images are not available.
+ * Renders an inline SVG placeholder when real certificate images are not
+ * available. (Enlarge-on-click is not wired yet; thumbnails render inert.)
  */
 export function CertificateGallery({ certificates }: CertificateGalleryProps) {
   if (certificates.length === 0) return null;
 
   return (
     <section aria-label="Certificates" className="mt-8">
-      <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+      <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-ink-600">
         Certifications
       </h3>
       <div className="mt-4 flex gap-3 overflow-x-auto pb-2 sm:gap-4">
@@ -40,7 +40,7 @@ function CertificateThumbnail({ src, alt, title }: CertificateItem) {
 
   return (
     <figure
-      className={`min-w-[160px] max-w-[200px] shrink-0 rounded border border-ink-100 bg-white ${showImage ? "overflow-hidden" : ""}`}
+      className={`min-w-[160px] max-w-[200px] shrink-0 rounded-sm border border-ink-900/10 bg-paper-deep ${showImage ? "overflow-hidden" : ""}`}
     >
       {showImage ? (
         /* eslint-disable-next-line @next/next/no-img-element */
@@ -52,15 +52,15 @@ function CertificateThumbnail({ src, alt, title }: CertificateItem) {
         />
       ) : isPlaceholder ? (
         // Use a visual placeholder styled for certificate look
-        <div className="flex h-[220px] w-full items-center justify-center bg-stone-100 p-4">
+        <div className="flex h-[220px] w-full items-center justify-center bg-paper-deep p-4 text-ink-400">
           {/* Placeholder representation */}
-          <svg className="size-10 opacity-30" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
+          <svg aria-hidden="true" className="size-10 opacity-40" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
           </svg>
         </div>
       ) : null}
 
-      <figcaption className="p-3 text-[11px] leading-snug text-muted-foreground">
+      <figcaption className="p-3 text-[11px] leading-snug text-ink-600">
         {title || alt}
       </figcaption>
     </figure>

@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { PhotoPlaceholder } from "@/components/ui/photo-placeholder";
+
 import { Button } from "@/components/ui/button";
+import { Container } from "@/components/ui/container";
+import { ImageSlot } from "@/components/ui/image-slot";
 import { cn } from "@/lib/utils";
 
 interface QuickFact {
@@ -9,6 +11,8 @@ interface QuickFact {
 }
 
 interface FeaturedTreatmentProps {
+  /** Editorial numeral, e.g. "01". */
+  num?: string;
   /** Treatment display title. */
   title: React.ReactNode;
   /** Brief subtitle or tagline. */
@@ -23,7 +27,7 @@ interface FeaturedTreatmentProps {
   imageAlt?: string;
   /** Which side the image appears on. Alternates per row. */
   imageSide?: "left" | "right";
-  /** Whether this uses a dark background section. */
+  /** Whether this uses the deeper warm background for visual punctuation. */
   dark?: boolean;
   /** Primary CTA destination. Defaults to /contact. */
   ctaHref?: string;
@@ -33,14 +37,12 @@ interface FeaturedTreatmentProps {
 
 /**
  * Section 6: Featured Treatments (Injectables)
- * Three asymmetric rows — each featuring one treatment with large imagery
- * and supporting text/quick-facts. Alternating image/text order.
- * Last row optionally uses a dark background for visual punctuation.
- *
- * Desktop: image + text in grid layout (asymmetric split).
- * Mobile: image first (full-width portrait), then text below.
+ * Editorial spreads — oversized serif numeral, portrait image slot, narrative
+ * prose, and quick facts as a hairline table. Alternating image/text order.
+ * Rendered inside the page's "Injectables & Contouring" chapter section.
  */
 export function FeaturedTreatment({
+  num,
   title,
   subtitle,
   narrative,
@@ -52,131 +54,89 @@ export function FeaturedTreatment({
   ctaHref = "/contact",
   ctaLabel = "Book a consultation",
 }: FeaturedTreatmentProps) {
-  const showImage = !!imageSrc && !imageSrc.startsWith("/placeholder");
   const isPlaceholder = imageSrc && imageSrc.startsWith("/placeholder");
 
   return (
-    <section
-      className={cn(
-        "py-20 sm:py-28 lg:py-32 xl:py-36",
-        dark ? "bg-ink-950 text-white" : "",
-      )}
-    >
-      <div
-        className={cn(
-          "mx-auto px-5 sm:px-8 lg:max-w-7xl",
-          dark ? "lg:grid lg:grid-cols-[1fr_1fr] lg:gap-16" : "",
-        )}
-      >
-        {/* Left column: Image */}
-        {(showImage || isPlaceholder) && (
+    <div className={cn("bg-paper py-16 sm:py-20 lg:py-24", dark && "bg-paper-deep")}>
+      <Container>
+        <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          {/* Image */}
+          <div className={cn(imageSide === "right" ? "lg:order-2" : "")}>
+            <ImageSlot
+              src={imageSrc}
+              alt={imageAlt ?? ""}
+              label={
+                isPlaceholder
+                  ? typeof title === "string"
+                    ? title
+                    : undefined
+                  : undefined
+              }
+              ratio="4 / 5"
+            />
+          </div>
+
+          {/* Content */}
           <div
             className={cn(
-              imageSide === "right" ? "order-2 lg:order-none" : "",
-              showImage ? "lg:sticky lg:top-28" : "",
+              "flex flex-col items-start",
+              imageSide === "right" ? "lg:order-1" : "",
             )}
           >
-            {isPlaceholder && !showImage ? (
-              <PhotoPlaceholder
-                label={typeof title === "string" ? title : undefined}
-                note={`Treatment photo — ${typeof title === "string" ? title : ""}`}
-                ratio="4 / 5"
-                className="w-full rounded-sm bg-ink-900"
-              />
-            ) : showImage ? (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={imageSrc}
-                alt={imageAlt ?? ""}
-                className="w-full rounded-sm object-cover"
-                style={{ aspectRatio: "4 / 5" }}
-              />
-            ) : null}
-          </div>
-        )}
-
-        {/* Right column: Content */}
-        <div
-          className={cn(
-            showImage || isPlaceholder ? "mt-8 lg:mt-0" : "",
-            imageSide === "right" ? "lg:order-first" : "",
-            showImage || isPlaceholder
-              ? dark
-                ? "lg:pt-8"
-                : "lg:pt-8"
-              : "lg:self-center",
-          )}
-        >
-          {/* Title */}
-          <h2
-            className={cn(
-              "text-balance text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl",
-              dark ? "text-white" : "text-ink-900",
-            )}
-          >
-            {title}
-          </h2>
-
-          {subtitle && (
-            <p
-              className={cn(
-                "mt-3 text-base leading-relaxed sm:text-lg",
-                dark ? "text-ink-300" : "text-muted-foreground",
-              )}
-            >
-              {subtitle}
-            </p>
-          )}
-
-          {/* Narrative paragraphs */}
-          <div className="mt-6 space-y-4">
-            {narrative.map((p, i) => (
-              <p
-                key={i}
-                className={cn(
-                  "text-pretty leading-relaxed",
-                  dark ? "text-ink-200" : "text-muted-foreground",
-                )}
+            {num && (
+              <span
+                aria-hidden="true"
+                className="font-aesthetic text-5xl italic text-clay-500"
               >
-                {p.text}
+                {num}
+              </span>
+            )}
+
+            {subtitle && (
+              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.14em] text-ink-600">
+                {subtitle}
               </p>
-            ))}
-          </div>
+            )}
 
-          {/* Quick facts */}
-          {quickFacts && quickFacts.length > 0 && (
-            <dl className="mt-8 grid gap-4 sm:grid-cols-2">
-              {quickFacts.map((fact) => (
-                <div key={fact.label}>
-                  <dt
-                    className={cn(
-                      "text-xs font-semibold uppercase tracking-wider",
-                      dark ? "text-ink-400" : "text-ink-400",
-                    )}
-                  >
-                    {fact.label}
-                  </dt>
-                  <dd
-                    className={cn(
-                      "mt-1 text-sm leading-snug",
-                      dark ? "text-ink-200" : "text-ink-700",
-                    )}
-                  >
-                    {fact.value}
-                  </dd>
-                </div>
+            <h3 className="mt-3 text-3xl font-bold tracking-tight text-ink-900 sm:text-4xl">
+              {title}
+            </h3>
+
+            <div className="mt-6 space-y-4">
+              {narrative.map((p, i) => (
+                <p
+                  key={i}
+                  className="max-w-xl text-pretty text-base leading-relaxed text-ink-600"
+                >
+                  {p.text}
+                </p>
               ))}
-            </dl>
-          )}
+            </div>
 
-          {/* CTA */}
-          <div className="mt-8">
-            <Button asChild variant="accent" size="lg">
+            {quickFacts && quickFacts.length > 0 && (
+              <dl className="mt-8 w-full max-w-xl border-t border-ink-900/10">
+                {quickFacts.map((f) => (
+                  <div
+                    key={f.label}
+                    className="flex items-baseline justify-between gap-6 border-b border-ink-900/10 py-3"
+                  >
+                    <dt className="text-xs font-semibold uppercase tracking-[0.12em] text-ink-600">
+                      {f.label}
+                    </dt>
+                    <dd className="text-right text-sm font-medium text-ink-800">
+                      {f.value}
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            )}
+
+            <Button asChild variant="clay" size="lg" className="mt-9">
               <Link href={ctaHref}>{ctaLabel}</Link>
             </Button>
           </div>
         </div>
-      </div>
-    </section>
+      </Container>
+    </div>
   );
 }
