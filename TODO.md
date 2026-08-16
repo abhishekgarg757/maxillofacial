@@ -66,3 +66,4 @@ Artifacts Dr. Gupta has approved. Agents gate *quality*; only humans mark *appro
 | `aesthetic-treatments.ts` (treatment list) | needs-human | — | — |
 | `/aesthetic` expertise credential claims ("advanced training in aesthetic medicine") | needs-human | — | — |
 | `/aesthetic` hero subtitle + trust-strip positioning claims ("surgical-grade anatomical knowledge", "Evidence-Based Approach") | needs-human | — | — |
+| `/testimonials` hero trust strip — "5.0 average rating" and "Verified outcomes" claims | needs-human | — | — |

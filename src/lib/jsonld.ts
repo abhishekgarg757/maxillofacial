@@ -104,6 +104,64 @@ export function articleJsonLd(a: {
   };
 }
 
+/** Review schema for a single testimonial. */
+export function reviewJsonLd(r: {
+  author: string;
+  quote: string;
+  rating: number;
+  date?: string;
+  procedureSlug?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Review",
+    author: { "@type": "Person", name: r.author },
+    reviewBody: r.quote,
+    reviewRating: {
+      "@type": "Rating",
+      ratingValue: r.rating,
+      bestRating: 5,
+      worstRating: 1,
+    },
+    datePublished: r.date,
+    itemReviewed:
+      r.procedureSlug
+        ? {
+            "@type": "MedicalProcedure",
+            name: r.procedureSlug.replace(/-/g, " "),
+            url: `${site.url}/procedures/${r.procedureSlug}`,
+            provider: { "@id": ORG_ID },
+          }
+        : { "@type": "MedicalClinic", "@id": ORG_ID },
+  };
+}
+
+/** AggregateRating schema for the testimonials page. */
+export function aggregateRatingJsonLd(reviews: { rating: number; author: string; date?: string }[]) {
+  const count = reviews.length;
+  const average = reviews.reduce((sum, r) => sum + r.rating, 0) / count;
+  return {
+    "@context": "https://schema.org",
+    "@type": "AggregateRating",
+    itemReviewed: { "@type": "MedicalClinic", "@id": ORG_ID },
+    ratingValue: Number(average.toFixed(1)),
+    reviewCount: count,
+    bestRating: 5,
+    worstRating: 1,
+  };
+}
+
+/** Combined Review + AggregateRating graph for testimonials page. */
+export function testimonialsJsonLd(testimonials: { author: string; quote: string; rating: number; date?: string; procedureSlug?: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      aggregateRatingJsonLd(testimonials),
+      ...testimonials.map((t) => reviewJsonLd(t)),
+    ],
+  };
+}
+
 /** Render-ready JSON-LD script tag props. */
 export function jsonLdScript(data: unknown) {
   return {

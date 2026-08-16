@@ -59,10 +59,17 @@
   /* Aesthetic page — editorial identity (warm paper canvas + terracotta) */
   --color-paper: oklch(0.976 0.01 85);
   --color-paper-deep: oklch(0.952 0.014 85);
+  --color-clay-50: oklch(0.976 0.018 42);
+  --color-clay-100: oklch(0.948 0.034 42);
+  --color-clay-200: oklch(0.892 0.066 42);
   --color-clay-300: oklch(0.804 0.096 42);
+  --color-clay-400: oklch(0.722 0.122 42);
   --color-clay-500: oklch(0.628 0.138 42);
   --color-clay-600: oklch(0.552 0.148 42);
   --color-clay-700: oklch(0.47 0.13 42);
+  --color-clay-800: oklch(0.388 0.11 42);
+  --color-clay-900: oklch(0.298 0.082 42);
+  --color-clay-950: oklch(0.215 0.054 42);
 
   /* Fonts (wired via next/font CSS variables in layout) */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;

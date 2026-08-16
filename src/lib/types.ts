@@ -64,6 +64,10 @@ export interface Testimonial {
   /** e.g. "Orthognathic surgery patient". */
   context: string;
   rating: number;
+  /** ISO date string for datePublished in Review schema (optional for draft). */
+  date?: string;
+  /** Optional slug to link to procedure page. */
+  procedureSlug?: string;
 }
 
 export interface BeforeAfterCase {

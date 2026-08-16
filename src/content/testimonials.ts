@@ -12,6 +12,8 @@ export const testimonials: Testimonial[] = [
     author: "A. Sharma",
     context: "Orthognathic surgery patient",
     rating: 5,
+    date: "2024-03-15",
+    procedureSlug: "orthognathic-surgery",
   },
   {
     quote:
@@ -19,6 +21,8 @@ export const testimonials: Testimonial[] = [
     author: "R. Mehta",
     context: "Dental implants patient",
     rating: 5,
+    date: "2024-05-22",
+    procedureSlug: "dental-implants",
   },
   {
     quote:
@@ -26,6 +30,8 @@ export const testimonials: Testimonial[] = [
     author: "S. Kapoor",
     context: "Facial trauma patient",
     rating: 5,
+    date: "2024-01-10",
+    procedureSlug: "facial-trauma",
   },
   {
     quote:
@@ -33,6 +39,8 @@ export const testimonials: Testimonial[] = [
     author: "N. Iyer",
     context: "TMJ treatment patient",
     rating: 5,
+    date: "2024-07-08",
+    procedureSlug: "tmj-treatment",
   },
   {
     quote:
@@ -40,6 +48,8 @@ export const testimonials: Testimonial[] = [
     author: "P. Singh",
     context: "Corrective jaw surgery patient",
     rating: 5,
+    date: "2024-02-28",
+    procedureSlug: "orthognathic-surgery",
   },
   {
     quote:
@@ -47,5 +57,7 @@ export const testimonials: Testimonial[] = [
     author: "M. Das",
     context: "Dental implants patient",
     rating: 5,
+    date: "2024-06-14",
+    procedureSlug: "dental-implants",
   },
 ];

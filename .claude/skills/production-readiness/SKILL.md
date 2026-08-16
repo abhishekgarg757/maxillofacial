@@ -1,6 +1,6 @@
 ---
 name: production-readiness
-description: Release checklist and production-readiness verification for this clinic site. Use before any deploy (/production-check) or when auditing readiness. Covers build, env, routes, SEO, consent, security toggles, and the human release plan. Execution agent: deployment-engineer.
+description: "Release checklist and production-readiness verification for this clinic site. Use before any deploy (/production-check) or when auditing readiness. Covers build, env, routes, SEO, consent, security toggles, and the human release plan. Execution agent: deployment-engineer."
 ---
 
 # Production Readiness
