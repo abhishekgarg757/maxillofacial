@@ -8,14 +8,14 @@ import * as React from "react";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { site } from "@/content/site";
 import { cn } from "@/lib/utils";
+import { site } from "@/content/site";
 
 function Logo({ onDark = false }: { onDark?: boolean }) {
   return (
     <Link href="/" className="group flex items-center gap-2.5">
       <span className="relative grid size-10 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg shadow-brand-600/25">
-        <span className="font-display text-base font-extrabold tracking-tight">
+        <span className="font-aesthetic text-base font-extrabold tracking-tight">
           SG
         </span>
         <span className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-accent-400/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -23,8 +23,8 @@ function Logo({ onDark = false }: { onDark?: boolean }) {
       <span className="flex flex-col leading-none">
         <span
           className={cn(
-            "font-display text-[15px] font-extrabold tracking-tight",
-            onDark ? "text-white" : "text-ink-900",
+            "font-aesthetic text-[15px] font-extrabold tracking-tight",
+            onDark ? "text-white" : "text-clay-900",
           )}
         >
           Dr. Saloni Gupta
@@ -32,10 +32,10 @@ function Logo({ onDark = false }: { onDark?: boolean }) {
         <span
           className={cn(
             "mt-0.5 text-[11px] font-medium tracking-wide",
-            onDark ? "text-ink-300" : "text-muted-foreground",
+            onDark ? "text-clay-300" : "text-clay-500",
           )}
         >
-          Oral &amp; Maxillofacial Surgery
+          Oral & Maxillofacial Surgery
         </span>
       </span>
     </Link>
@@ -59,7 +59,7 @@ export function Navbar() {
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-ink-100 bg-white/80 backdrop-blur-xl supports-[backdrop-filter]:bg-white/70"
+          ? "border-b border-clay-100 bg-clay-50/80 backdrop-blur-xl supports-[backdrop-filter]:bg-clay-50/70"
           : "border-b border-transparent bg-transparent",
       )}
     >
@@ -79,8 +79,8 @@ export function Navbar() {
                 className={cn(
                   "rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
                   active
-                    ? "bg-brand-50 text-brand-700"
-                    : "text-ink-600 hover:bg-ink-100 hover:text-ink-900",
+                    ? "bg-clay-100 text-clay-900"
+                    : "text-clay-500 hover:bg-clay-100 hover:text-clay-900",
                 )}
               >
                 {link.label}
@@ -109,19 +109,19 @@ export function Navbar() {
           <Dialog.Trigger asChild>
             <button
               aria-label="Open menu"
-              className="inline-grid size-11 place-items-center rounded-xl border border-ink-200 bg-white/70 text-ink-800 backdrop-blur lg:hidden"
+              className="inline-grid size-11 place-items-center rounded-xl border border-clay-200 bg-clay-50/70 text-clay-600 backdrop-blur lg:hidden"
             >
               <Menu className="size-5" />
             </button>
           </Dialog.Trigger>
           <Dialog.Portal>
-            <Dialog.Overlay className="fixed inset-0 z-50 bg-ink-950/40 backdrop-blur-sm animate-fade-in" />
-            <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-sm flex-col gap-6 overflow-y-auto bg-white p-6 shadow-2xl outline-none animate-slide-in-right">
+            <Dialog.Overlay className="fixed inset-0 z-50 bg-clay-950/40 backdrop-blur-sm animate-fade-in" />
+            <Dialog.Content className="fixed inset-y-0 right-0 z-50 flex w-[88%] max-w-sm flex-col gap-6 overflow-y-auto bg-clay-50 p-6 shadow-2xl outline-none animate-slide-in-right">
               <div className="flex items-center justify-between">
                 <Logo />
                 <Dialog.Close
                   aria-label="Close menu"
-                  className="inline-grid size-10 place-items-center rounded-xl border border-ink-200 text-ink-700"
+                  className="inline-grid size-10 place-items-center rounded-xl border border-clay-200 text-clay-700"
                 >
                   <X className="size-5" />
                 </Dialog.Close>
@@ -141,8 +141,8 @@ export function Navbar() {
                       className={cn(
                         "rounded-xl px-4 py-3 text-base font-medium transition-colors",
                         active
-                          ? "bg-brand-50 text-brand-700"
-                          : "text-ink-700 hover:bg-ink-100",
+                          ? "bg-clay-100 text-clay-900"
+                          : "text-clay-600 hover:bg-clay-100",
                       )}
                     >
                       {link.label}

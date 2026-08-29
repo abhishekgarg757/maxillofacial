@@ -19,7 +19,7 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="relative mt-auto overflow-hidden bg-ink-950 text-ink-300">
+    <footer className="relative mt-auto overflow-hidden bg-clay-950 text-clay-100">
       <div className="pointer-events-none absolute inset-0 bg-grid opacity-40" />
       <div className="pointer-events-none absolute -left-24 top-0 size-96 rounded-full bg-brand-600/20 blur-3xl" />
       <div className="pointer-events-none absolute -right-24 bottom-0 size-96 rounded-full bg-accent-600/10 blur-3xl" />
@@ -36,11 +36,11 @@ export function Footer() {
                 <p className="font-display text-base font-bold text-white">
                   {site.doctorName}
                 </p>
-                <p className="text-xs text-ink-400">{site.credentials}</p>
+                <p className="text-xs text-clay-300">{site.credentials}</p>
               </div>
             </div>
-            <p className="max-w-sm text-sm leading-relaxed text-ink-400">
-              Evidence-based oral &amp; maxillofacial surgery in Delhi — restoring
+            <p className="max-w-sm text-sm leading-relaxed text-clay-300">
+              Evidence-based oral & maxillofacial surgery in Delhi — restoring
               function, comfort and confidence with a calm, patient-first
               approach.
             </p>
@@ -53,7 +53,7 @@ export function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={s.label}
-                    className="grid size-10 place-items-center rounded-xl border border-white/10 bg-white/5 text-ink-300 transition-colors hover:border-brand-400/40 hover:bg-brand-500/10 hover:text-white"
+                    className="grid size-10 place-items-center rounded-xl border border-clay-200 bg-clay-50 text-clay-600 transition-colors hover:border-brand-400/40 hover:bg-clay-100 hover:text-white"
                   >
                     <SocialIcon name={s.icon} className="size-4.5" />
                   </a>
@@ -82,7 +82,7 @@ export function Footer() {
 
           {/* Contact */}
           <FooterCol title="Visit / Contact">
-            <li className="flex items-start gap-3 text-sm text-ink-400">
+            <li className="flex items-start gap-3 text-sm text-clay-300">
               <MapPin className="mt-0.5 size-4.5 shrink-0 text-brand-400" />
               <span>
                 {site.address.line1}, {site.address.line2}
@@ -93,7 +93,7 @@ export function Footer() {
             <li>
               <a
                 href={`tel:${site.phoneE164}`}
-                className="flex items-center gap-3 text-sm text-ink-400 transition-colors hover:text-white"
+                className="flex items-center gap-3 text-sm text-clay-300 transition-colors hover:text-white"
               >
                 <Phone className="size-4.5 shrink-0 text-brand-400" />
                 {site.phoneDisplay}
@@ -102,7 +102,7 @@ export function Footer() {
             <li>
               <a
                 href={`mailto:${site.email}`}
-                className="flex items-center gap-3 text-sm text-ink-400 transition-colors hover:text-white"
+                className="flex items-center gap-3 text-sm text-clay-300 transition-colors hover:text-white"
               >
                 <Mail className="size-4.5 shrink-0 text-brand-400" />
                 {site.email}
@@ -113,18 +113,18 @@ export function Footer() {
                 href={whatsappUrl(site.whatsappDigits, WHATSAPP_DEFAULT_MESSAGE)}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-3 text-sm text-ink-400 transition-colors hover:text-white"
+                className="flex items-center gap-3 text-sm text-clay-300 transition-colors hover:text-white"
               >
                 <MessageCircle className="size-4.5 shrink-0 text-brand-400" />
                 Chat on WhatsApp
               </a>
             </li>
-            <li className="flex items-start gap-3 text-sm text-ink-400">
+            <li className="flex items-start gap-3 text-sm text-clay-300">
               <Clock className="mt-0.5 size-4.5 shrink-0 text-brand-400" />
               <span>
                 {site.hours.map((h) => (
                   <span key={h.day} className="block">
-                    <span className="text-ink-300">{h.day}:</span> {h.time}
+                    <span className="text-clay-300">{h.day}:</span> {h.time}
                   </span>
                 ))}
               </span>
@@ -133,29 +133,29 @@ export function Footer() {
         </div>
 
         {/* Disclaimer */}
-        <div className="mt-14 rounded-2xl border border-white/10 bg-white/5 p-5 text-xs leading-relaxed text-ink-400">
-          <strong className="font-semibold text-ink-200">
+        <div className="mt-14 rounded-2xl border border-clay-200 bg-clay-50 p-5 text-clay-500 leading-relaxed">
+          <strong className="font-semibold text-clay-600">
             Medical disclaimer:
           </strong>{" "}
           The information on this website is for general education only and is not
           a substitute for professional medical advice, diagnosis or treatment.
-          Outcomes vary between patients. Always consult a qualified oral &amp;
+          Outcomes vary between patients. Always consult a qualified oral &
           maxillofacial surgeon about your specific condition. In an emergency,
           call your local emergency number immediately.
         </div>
 
-        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-ink-500 sm:flex-row">
+        <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-clay-200 pt-8 text-xs text-clay-400 sm:flex-row">
           <p>
             © {year} {site.doctorName}. All rights reserved.
           </p>
           <div className="flex items-center gap-5">
-            <Link href="/privacy" className="hover:text-ink-200">
+            <Link href="/privacy" className="hover:text-clay-200">
               Privacy
             </Link>
-            <Link href="/terms" className="hover:text-ink-200">
+            <Link href="/terms" className="hover:text-clay-200">
               Terms
             </Link>
-            <Link href="/disclaimer" className="hover:text-ink-200">
+            <Link href="/disclaimer" className="hover:text-clay-200">
               Disclaimer
             </Link>
           </div>
@@ -174,7 +174,7 @@ function FooterCol({
 }) {
   return (
     <div>
-      <h3 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-white">
+      <h3 className="mb-4 font-display text-sm font-bold uppercase tracking-wider text-clay-100">
         {title}
       </h3>
       <ul className="flex flex-col gap-3">{children}</ul>
@@ -193,7 +193,7 @@ function FooterLink({
     <li>
       <Link
         href={href}
-        className="text-sm text-ink-400 transition-colors hover:text-white"
+        className="text-sm text-clay-300 transition-colors hover:text-white"
       >
         {children}
       </Link>

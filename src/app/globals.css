@@ -226,6 +226,18 @@ h4 {
   }
 }
 
+/* Serif font: headings use Fraunces/Georgia via font-aesthetic;
+   body stays sans-serif (Inter) for body text. */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-aesthetic);
+  letter-spacing: -0.02em;
+}
+
 /* Utility: subtle grid backdrop for dark sections */
 .bg-grid {
   background-image: linear-gradient(

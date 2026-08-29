@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Sora, Fraunces } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -20,6 +20,16 @@ const sora = Sora({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+  display: "swap",
+});
+
+/** Fraunces serif font — used as `font-aesthetic` site-wide for headings /
+ * editorial text, matching the aesthetic/testimonials page design. */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["italic", "normal"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -80,14 +90,14 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${sora.variable} h-full antialiased`}
+      className={`${inter.variable} ${sora.variable} ${fraunces.variable} h-full antialiased`}
     >
       <head>
         <script {...jsonLdScript(organizationJsonLd())} />
       </head>
-      <body className="flex min-h-full flex-col bg-background">
+      <body className="flex min-h-full flex-col bg-background font-inter">
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 font-aesthetic">{children}</main>
         <Footer />
         <ChatWidget />
         <Analytics />

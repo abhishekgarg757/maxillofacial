@@ -34,11 +34,12 @@ export default function BlogPage() {
         title="Insights & guides"
         description="Practical, evidence-informed articles to help you understand your options and make confident decisions about your care."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Blog" }]}
+        variant="aesthetic"
       />
 
       <Section>
         {posts.length > 0 ? (
-          <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 bg-clay-50 py-12">
             {posts.map((post) => (
               <StaggerItem key={post.slug} className="h-full">
                 <BlogCard post={post} />
@@ -46,7 +47,7 @@ export default function BlogPage() {
             ))}
           </Stagger>
         ) : (
-          <p className="text-center text-muted-foreground">
+          <p className="text-center text-clay-300">
             New articles are on the way. Please check back soon.
           </p>
         )}
