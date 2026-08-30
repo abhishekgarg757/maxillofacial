@@ -37,24 +37,34 @@ export default function BlogPage() {
         variant="aesthetic"
       />
 
-      <Section className="pt-6 pb-12">
-        <Reveal>
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold tracking-tight text-ink-900 mb-4">
-              Patient Education
-            </h1>
-            <p className="text-clay-400 text-lg max-w-2xl mx-auto leading-relaxed">
-              Evidence-informed articles to help you understand your options and make confident
-              decisions about your care.
-            </p>
-          </div>
-        </Reveal>
+      {/* ── Hero Section — inspired by AestheticHero ── */}
+      <Section
+        className="bg-paper pb-24 md:pb-32 lg:pb-40 relative overflow-hidden"
+      >
+        <div className="absolute inset-0">
+          <div className="bg-gradient-to-b from-paper to-paper-deep inset-0" />
+          <div className="absolute top-0 left-0 right-0 h-48 bg-grid" />
+        </div>
+        <div className="relative max-w-7xl mx-auto px-6 py-12 text-center">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold tracking-tight text-ink-900 mb-4">
+            Patient Education
+          </h1>
+          <p className="text-clay-400 text-lg max-w-2xl mx-auto leading-relaxed">
+            Evidence-informed articles to help you understand your options and make confident
+            decisions about your care.
+          </p>
+        </div>
+      </Section>
 
-        <Reveal direction="up">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto">
-            {posts.map((post) => (
-              <BlogCard post={post} key={post.slug} />
-            ))}
+      {/* ── Blog Grid ── */}
+      <Section className="pt-12 pb-12">
+        <Reveal>
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {posts.map((post) => (
+                <BlogCard post={post} key={post.slug} />
+              ))}
+            </div>
           </div>
         </Reveal>
       </Section>
