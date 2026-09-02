@@ -37,6 +37,11 @@ export async function generateMetadata({
       url: `${site.url}/blog/${slug}`,
       publishedTime: post.meta.date,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: post.meta.title,
+      description: post.meta.excerpt,
+    },
   };
 }
 
@@ -85,7 +90,7 @@ export default async function BlogPostPage({
           { label: meta.title },
         ]}
       >
-        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-300">
+        <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-ink-100">
           <span className="inline-flex items-center gap-1.5">
             <CalendarDays className="size-4" />
             {formatDate(meta.date)}
@@ -100,7 +105,7 @@ export default async function BlogPostPage({
       <Section>
         <div className="mx-auto max-w-3xl">
           <article
-            className="prose prose-lg max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink-900 prose-p:text-ink-700 prose-a:text-brand-700 prose-strong:text-ink-900 prose-li:text-ink-700 prose-blockquote:border-l-brand-500 prose-blockquote:bg-brand-50/50 prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-ink-700"
+            className="prose prose-lg max-w-none prose-headings:font-display prose-headings:tracking-tight prose-headings:text-ink-900 prose-p:text-ink-700 prose-a:text-accent prose-strong:text-ink-900 prose-li:text-ink-700 prose-blockquote:border-l-accent prose-blockquote:bg-accent-soft/50 prose-blockquote:py-1 prose-blockquote:not-italic prose-blockquote:text-ink-700"
           >
             <MDXRemote source={content} />
           </article>
@@ -138,7 +143,7 @@ export default async function BlogPostPage({
                   <p className="text-xs text-muted-foreground">
                     {formatDate(p.date)}
                   </p>
-                  <p className="mt-1 font-semibold text-ink-900 group-hover:text-brand-700">
+                  <p className="mt-1 font-semibold text-ink-900 group-hover:text-accent">
                     {p.title}
                   </p>
                 </Link>

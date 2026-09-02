@@ -5,9 +5,9 @@ import { ArrowRight, BadgeCheck, CalendarCheck, GraduationCap } from "lucide-rea
 
 import { Button } from "@/components/ui/button";
 import { Section, SectionHeading } from "@/components/ui/section";
+import { FeatureCard } from "@/components/ui/feature-card";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { PageHeader } from "@/components/sections/page-header";
-import { ExpertiseShowcase } from "@/components/sections/expertise-showcase";
 import { CtaBand } from "@/components/sections/cta-band";
 import { getIcon } from "@/lib/icons";
 import { doctor } from "@/content/doctor";
@@ -15,10 +15,25 @@ import { site } from "@/content/site";
 import { breadcrumbJsonLd, jsonLdScript } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
-  title: "About Dr. Saloni Gupta",
+  title: "About",
   description:
     "Meet Dr. Saloni Gupta, a Delhi-based oral & maxillofacial surgeon committed to evidence-based, patient-first surgical care.",
   alternates: { canonical: "/about" },
+  openGraph: {
+    title: "About Dr. Saloni Gupta",
+    description:
+      "Meet Dr. Saloni Gupta, a Delhi-based oral & maxillofacial surgeon committed to evidence-based, patient-first surgical care.",
+    url: `${site.url}/about`,
+    siteName: site.name,
+    locale: site.locale,
+    type: "profile",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Dr. Saloni Gupta",
+    description:
+      "Meet Dr. Saloni Gupta, a Delhi-based oral & maxillofacial surgeon committed to evidence-based, patient-first surgical care.",
+  },
 };
 
 export default function AboutPage() {
@@ -51,6 +66,7 @@ export default function AboutPage() {
                   alt={`Portrait of ${doctor.name}`}
                   width={900}
                   height={1100}
+                  sizes="(min-width: 1024px) 40vw, 100vw"
                   className="h-full w-full object-cover"
                 />
               </div>
@@ -62,27 +78,27 @@ export default function AboutPage() {
               </h2>
               <p className="mt-1 text-clay-700">{doctor.credentials}</p>
 
-              <p className="text-pretty text-base leading-relaxed text-clay-400 sm:text-lg">
+              <p className="text-pretty text-base leading-relaxed text-clay-700 sm:text-lg">
                 {doctor.intro}
               </p>
 
               <div className="rounded-3xl border border-clay-100 bg-clay-50 p-6">
                 <h3 className="flex items-center gap-2 font-display text-lg font-bold text-clay-900">
-                  <GraduationCap className="size-5 text-brand-600" />
+                  <GraduationCap className="size-5 text-accent" />
                   Registrations & memberships
                 </h3>
                 <ul className="mt-4 flex flex-col gap-3">
                   {doctor.memberships.map((m) => (
                     <li
                       key={m}
-                      className="flex items-start gap-2.5 text-sm text-clay-500"
+                      className="flex items-start gap-2.5 text-sm text-clay-700"
                     >
-                      <BadgeCheck className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                      <BadgeCheck className="mt-0.5 size-5 shrink-0 text-accent" />
                       {m}
                     </li>
                   ))}
                 </ul>
-                <p className="mt-4 text-xs text-clay-300">
+                <p className="mt-4 text-xs text-clay-600">
                   Note: Credentials shown are placeholders pending confirmation.
                 </p>
               </div>
@@ -114,20 +130,16 @@ export default function AboutPage() {
           description="Four principles that shape every consultation and every procedure."
         />
         <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {doctor.philosophy.map((p) => {
+          {doctor.philosophy.map((p, i) => {
             const Icon = getIcon(p.icon);
             return (
-              <StaggerItem
-                key={p.title}
-                className="group flex h-full flex-col rounded-3xl border border-clay-100 bg-white p-7 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
-              >
-                <span className="mb-5 grid size-13 place-items-center rounded-2xl bg-gradient-to-br from-clay-100/50 to-clay-200/40 text-clay-500 transition-colors duration-300 group-hover:from-clay-200 group-hover:to-clay-300 group-hover:text-clay-600">
-                  <Icon className="size-6" />
-                </span>
-                <h3 className="text-lg font-bold text-clay-900">{p.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-clay-400">
-                  {p.body}
-                </p>
+              <StaggerItem key={p.title} index={i} className="h-full">
+                <FeatureCard
+                  icon={Icon}
+                  title={p.title}
+                  body={p.body}
+                  tone="neutral"
+                />
               </StaggerItem>
             );
           })}
@@ -147,13 +159,13 @@ export default function AboutPage() {
               <Reveal key={i} delay={i * 0.05}>
                 <li className="mb-10 last:mb-0">
                   <span className="absolute -left-[9px] mt-1.5 size-4 rounded-full border-2 border-white bg-clay-600 shadow" />
-                  <span className="text-xs font-bold uppercase tracking-wider text-clay-400">
+                  <span className="text-xs font-bold uppercase tracking-wider text-clay-700">
                     {t.year}
                   </span>
                   <h3 className="mt-1 text-lg font-bold text-clay-900">
                     {t.title}
                   </h3>
-                  <p className="mt-1 text-sm leading-relaxed text-clay-400">
+                  <p className="mt-1 text-sm leading-relaxed text-clay-700">
                     {t.detail}
                   </p>
                 </li>

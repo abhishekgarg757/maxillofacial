@@ -14,7 +14,7 @@ export const site: SiteConfig = {
   shortName: "Dr. Saloni Gupta",
   tagline: "Advanced Oral & Maxillofacial Surgery in Delhi",
   description:
-    "Dr. Saloni Gupta is an oral & maxillofacial surgeon in Delhi offering jaw reconstruction, corrective and orthognathic jaw surgery, facial trauma care, dental implants and TMJ (jaw joint) surgery with a patient-first, evidence-based approach.",
+    "Oral & maxillofacial surgeon in Delhi — jaw reconstruction, orthognathic surgery, dental implants, facial trauma and TMJ care, evidence-based.",
   // TODO: replace with the real production domain.
   url: "https://drsalonigupta.com",
   locale: "en_IN",
@@ -36,9 +36,14 @@ export const site: SiteConfig = {
     mapQuery: "Oral and Maxillofacial Surgeon, New Delhi",
   },
   hours: [
-    { day: "Monday – Friday", time: "10:00 AM – 7:00 PM" },
-    { day: "Saturday", time: "10:00 AM – 4:00 PM" },
-    { day: "Sunday", time: "Emergencies only" },
+    { day: "Monday", schemaDay: "Monday", opens: "10:00", closes: "19:00" },
+    { day: "Tuesday", schemaDay: "Tuesday", opens: "10:00", closes: "19:00" },
+    { day: "Wednesday", schemaDay: "Wednesday", opens: "10:00", closes: "19:00" },
+    { day: "Thursday", schemaDay: "Thursday", opens: "10:00", closes: "19:00" },
+    { day: "Friday", schemaDay: "Friday", opens: "10:00", closes: "19:00" },
+    { day: "Saturday", schemaDay: "Saturday", opens: "10:00", closes: "16:00" },
+    // Sunday: clinic closed — omitted from `hours` so the JSON-LD graph does
+    // not falsely advertise Sunday availability.
   ],
   socials: [
     // TODO: replace with real profile URLs.

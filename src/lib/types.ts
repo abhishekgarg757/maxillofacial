@@ -97,6 +97,35 @@ export interface Stat {
   icon?: string;
 }
 
+/**
+ * One day-of-week entry in {@link SiteConfig.hours}.
+ *
+ * `day` is rendered in the UI (footer, contact page). `opens` and `closes`
+ * are local-time `HH:MM` strings used to build the schema.org
+ * `OpeningHoursSpecification` graph for Google's Rich Results.
+ *
+ * If the clinic is closed on a given day, omit the entry. We do not emit a
+ * `closed` day in the JSON-LD because schema.org does not have a clean
+ * "closed" representation; absence is the correct signal.
+ */
+export interface OpeningHour {
+  /** Display label, e.g. "Monday", "Mon – Fri", "Saturday". */
+  day: string;
+  /** ISO-8601 day-of-week URL: https://schema.org/Monday … Sunday. */
+  schemaDay:
+    | "Monday"
+    | "Tuesday"
+    | "Wednesday"
+    | "Thursday"
+    | "Friday"
+    | "Saturday"
+    | "Sunday";
+  /** Local opening time, `HH:MM` 24h, e.g. "10:00". */
+  opens: string;
+  /** Local closing time, `HH:MM` 24h, e.g. "19:00". */
+  closes: string;
+}
+
 export interface SiteConfig {
   name: string;
   doctorName: string;
@@ -119,7 +148,7 @@ export interface SiteConfig {
     country: string;
     mapQuery: string;
   };
-  hours: { day: string; time: string }[];
+  hours: OpeningHour[];
   socials: { label: string; href: string; icon: string }[];
   nav: NavLink[];
 }

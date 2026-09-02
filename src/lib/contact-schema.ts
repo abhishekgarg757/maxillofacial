@@ -20,8 +20,10 @@ export const contactSchema = z.object({
     .trim()
     .min(10, "Please add a little more detail (min. 10 characters)")
     .max(2000, "Message is too long (max. 2000 characters)"),
-  // Honeypot: real users never see or fill this. Must stay empty.
-  company: z.string().max(0).optional(),
+  // Honeypot: real users never see or fill this. We accept any string so
+  // bots that *do* fill it get a 200 (handler silently drops) instead of a
+  // 422, which would tell a smart bot the field's special.
+  company: z.string().max(200).optional(),
   // Consent checkbox.
   consent: z
     .boolean()

@@ -10,13 +10,13 @@ const buttonVariants = cva(
     variants: {
       variant: {
         primary:
-          "bg-brand-600 text-white shadow-lg shadow-brand-600/20 hover:bg-brand-700 hover:shadow-brand-600/30 active:scale-[0.98]",
+          "bg-clay-600 text-white shadow-lg shadow-clay-600/20 hover:bg-clay-700 hover:shadow-clay-600/30 active:scale-[0.98]",
         accent:
           "bg-accent-600 text-white shadow-lg shadow-accent-600/25 hover:bg-accent-700 active:scale-[0.98]",
         clay:
           "bg-clay-600 text-white shadow-lg shadow-clay-600/25 hover:bg-clay-700 active:scale-[0.98]",
         outline:
-          "border border-ink-200 bg-white/60 text-ink-800 backdrop-blur hover:border-brand-400 hover:bg-white hover:text-brand-700",
+          "border border-ink-200 bg-white/60 text-ink-800 backdrop-blur hover:border-clay-400 hover:bg-white hover:text-clay-700",
         ghost: "text-ink-700 hover:bg-ink-100 hover:text-ink-900",
         light:
           "bg-white text-ink-900 shadow-lg shadow-ink-950/10 hover:bg-ink-50 active:scale-[0.98]",

@@ -5,17 +5,30 @@ import { TrustStrip } from "@/components/sections/trust-strip";
 import { EditorialNarrative } from "@/components/sections/editorial-narrative";
 import { TreatmentIndex } from "@/components/sections/treatment-index";
 import { TreatmentVisualGrid } from "@/components/sections/treatment-visual-grid";
-import { ProcedureCard } from "@/components/sections/procedure-card";
 import { CtaBand } from "@/components/sections/cta-band";
-import { procedures } from "@/content/procedures";
 import { site } from "@/content/site";
 import { breadcrumbJsonLd, jsonLdScript } from "@/lib/jsonld";
 
 export const metadata: Metadata = {
   title: "Procedures",
   description:
-    "Explore oral & maxillofacial procedures offered by Dr. Saloni Gupta — jaw reconstruction, facial trauma surgery, orthognathic & corrective jaw surgery, dental implants and TMJ surgery.",
+    "Oral & maxillofacial procedures in Delhi — jaw reconstruction, orthognathic, facial trauma, dental implants, TMJ and corrective jaw surgery.",
   alternates: { canonical: "/procedures" },
+  openGraph: {
+    title: "Procedures — Dr. Saloni Gupta",
+    description:
+      "Oral & maxillofacial procedures in Delhi — jaw reconstruction, orthognathic, facial trauma, dental implants, TMJ and corrective jaw surgery.",
+    url: `${site.url}/procedures`,
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Procedures — Dr. Saloni Gupta",
+    description:
+      "Oral & maxillofacial procedures in Delhi — jaw reconstruction, orthognathic, facial trauma, dental implants, TMJ and corrective jaw surgery.",
+  },
 };
 
 export default function ProceduresPage() {

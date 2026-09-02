@@ -1,7 +1,6 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
-import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 
@@ -88,7 +87,7 @@ export function TestimonialHero() {
             </motion.h1>
 
             <motion.p
-              className="mt-5 max-w-xl text-lg md:text-xl leading-relaxed text-ink-600 dark:text-ink-300"
+              className="mt-5 max-w-xl text-lg md:text-xl leading-relaxed text-ink-600 dark:text-ink-100"
               initial={reduce ? {} : { opacity: 0, y: 16 }}
               animate={reduce ? {} : { opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.25, ease: EASE_OUT_EXPO }}
@@ -98,35 +97,23 @@ export function TestimonialHero() {
               TMJ treatment — shared with consent, in their own words.
             </motion.p>
 
-            {/* Trust indicators strip */}
-            <motion.div
-              className="mt-8 flex flex-wrap items-center gap-5 lg:gap-8"
-              initial={reduce ? {} : { opacity: 0, y: 16 }}
-              animate={reduce ? {} : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.35, ease: EASE_OUT_EXPO }}
+            {/* Editorial note (no fabricated rating strip).
+                TODO(Track B): once consented testimonials are available, replace
+                this copy with a real rating/review summary + AggregateRating JSON-LD. */}
+            <div
+              className="mt-8 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-ink-700 dark:text-ink-100"
+              role="note"
+              aria-label="Editorial note about patient stories"
             >
-              <div className="flex items-center gap-2">
-                <div className="flex -space-x-2" aria-hidden="true">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="size-9 rounded-full border-2 border-white bg-gradient-to-br from-clay-100 to-clay-200 dark:from-clay-800 dark:to-clay-900 dark:border-ink-950"
-                    />
-                  ))}
-                </div>
-                <span className="text-sm font-semibold text-ink-900 dark:text-white">
-                  6+ patient stories
-                </span>
-              </div>
-              <div className="flex items-center gap-2 text-ink-700 dark:text-ink-300">
-                <Star className="size-5 text-clay-600 fill-clay-600" aria-hidden="true" />
-                <span className="text-sm font-medium">5.0 average rating</span>
-              </div>
-              <div className="hidden lg:flex items-center gap-2 text-ink-700 dark:text-ink-300">
-                <span className="text-sm font-medium">Verified outcomes</span>
-                <span className="text-xs uppercase tracking-[0.1em] text-clay-600 dark:text-clay-400">Consent documented</span>
-              </div>
-            </motion.div>
+              <span className="font-semibold text-ink-900 dark:text-white">
+                Patient stories
+              </span>
+              <span aria-hidden="true">·</span>
+              <span>
+                Real cases will be published here once each patient has given
+                documented consent.
+              </span>
+            </div>
           </div>
 
           {/* Right column - Single elegant visual anchor */}

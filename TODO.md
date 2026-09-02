@@ -67,3 +67,4 @@ Artifacts Dr. Gupta has approved. Agents gate *quality*; only humans mark *appro
 | `/aesthetic` expertise credential claims ("advanced training in aesthetic medicine") | needs-human | — | — |
 | `/aesthetic` hero subtitle + trust-strip positioning claims ("surgical-grade anatomical knowledge", "Evidence-Based Approach") | needs-human | — | — |
 | `/testimonials` hero trust strip — "5.0 average rating" and "Verified outcomes" claims | needs-human | — | — |
+| `src/lib/jsonld.ts: testimonialsJsonLd` — currently emits a neutral `ItemList` instead of `Review`/`AggregateRating` graph until consented data lands. Restore original graph once Track B "Consented testimonials" is approved. | in-progress | — | — |

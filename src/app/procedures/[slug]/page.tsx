@@ -51,6 +51,11 @@ export async function generateMetadata({
       description: procedure.summary,
       url: `${site.url}/procedures/${procedure.slug}`,
     },
+    twitter: {
+      card: "summary_large_image",
+      title: `${procedure.title} · ${site.doctorName}`,
+      description: procedure.summary,
+    },
   };
 }
 
@@ -130,7 +135,7 @@ export default async function ProcedureDetailPage({
                     <ul className="mt-5 grid gap-3">
                       {s.points.map((pt, j) => (
                         <li key={j} className="flex items-start gap-3">
-                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                          <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-accent" />
                           <span className="text-sm leading-relaxed text-ink-700">
                             {pt}
                           </span>
@@ -154,7 +159,7 @@ export default async function ProcedureDetailPage({
                 <ul className="mt-5 grid gap-3 sm:grid-cols-2">
                   {procedure.indications.map((ind, i) => (
                     <li key={i} className="flex items-start gap-2.5">
-                      <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                      <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-accent" />
                       <span className="text-sm leading-relaxed text-ink-700">
                         {ind}
                       </span>
@@ -167,12 +172,12 @@ export default async function ProcedureDetailPage({
             {/* Benefits & risks */}
             <div className="grid gap-5 sm:grid-cols-2">
               <Reveal>
-                <div className="h-full rounded-3xl border border-brand-100 bg-brand-50/50 p-7">
+                <div className="h-full rounded-3xl border border-clay-200 bg-clay-50/50 p-7">
                   <h3 className="text-lg font-bold text-ink-900">Benefits</h3>
                   <ul className="mt-4 flex flex-col gap-3">
                     {procedure.benefits.map((b, i) => (
                       <li key={i} className="flex items-start gap-2.5">
-                        <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                        <CheckCircle2 className="mt-0.5 size-5 shrink-0 text-accent" />
                         <span className="text-sm leading-relaxed text-ink-700">
                           {b}
                         </span>
@@ -184,13 +189,13 @@ export default async function ProcedureDetailPage({
               <Reveal delay={0.05}>
                 <div className="h-full rounded-3xl border border-ink-100 bg-white p-7">
                   <h3 className="flex items-center gap-2 text-lg font-bold text-ink-900">
-                    <Info className="size-5 text-accent-600" />
+                    <Info className="size-5 text-accent" />
                     Risks &amp; considerations
                   </h3>
                   <ul className="mt-4 flex flex-col gap-3">
                     {procedure.risks.map((r, i) => (
                       <li key={i} className="flex items-start gap-2.5">
-                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent-500" />
+                        <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-accent" />
                         <span className="text-sm leading-relaxed text-ink-700">
                           {r}
                         </span>
@@ -213,7 +218,7 @@ export default async function ProcedureDetailPage({
                       key={i}
                       className="flex gap-4 rounded-2xl border border-ink-100 bg-white p-5"
                     >
-                      <span className="grid size-9 shrink-0 place-items-center rounded-full bg-brand-600 text-sm font-bold text-white">
+                      <span className="grid size-9 shrink-0 place-items-center rounded-full bg-clay-600 text-sm font-bold text-white">
                         {i + 1}
                       </span>
                       <div>
@@ -248,7 +253,7 @@ export default async function ProcedureDetailPage({
                       href={src.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-brand-700 hover:underline"
+                      className="inline-flex items-center gap-1.5 text-accent hover:underline"
                     >
                       {src.label}
                       <ExternalLink className="size-3.5" />
@@ -268,7 +273,7 @@ export default async function ProcedureDetailPage({
           <aside className="lg:sticky lg:top-28 lg:self-start">
             <div className="overflow-hidden rounded-3xl border border-ink-100 bg-white shadow-sm">
               <div className="flex items-center gap-3 border-b border-ink-100 bg-ink-50 p-6">
-                <span className="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-brand-500 to-brand-700 text-white">
+                <span className="grid size-12 place-items-center rounded-2xl bg-gradient-to-br from-clay-500 to-clay-700 text-white">
                   <DynamicIcon name={procedure.icon} className="size-6" />
                 </span>
                 <div>
@@ -280,7 +285,7 @@ export default async function ProcedureDetailPage({
               </div>
               <dl className="flex flex-col divide-y divide-ink-100 p-6 text-sm">
                 <div className="flex items-start gap-3 pb-4">
-                  <Syringe className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                  <Syringe className="mt-0.5 size-5 shrink-0 text-accent" />
                   <div>
                     <dt className="font-semibold text-ink-900">Anaesthesia</dt>
                     <dd className="mt-0.5 text-muted-foreground">
@@ -289,7 +294,7 @@ export default async function ProcedureDetailPage({
                   </div>
                 </div>
                 <div className="flex items-start gap-3 py-4">
-                  <Clock className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                  <Clock className="mt-0.5 size-5 shrink-0 text-accent" />
                   <div>
                     <dt className="font-semibold text-ink-900">
                       Typical duration
@@ -300,7 +305,7 @@ export default async function ProcedureDetailPage({
                   </div>
                 </div>
                 <div className="flex items-start gap-3 pt-4">
-                  <Stethoscope className="mt-0.5 size-5 shrink-0 text-brand-600" />
+                  <Stethoscope className="mt-0.5 size-5 shrink-0 text-accent" />
                   <div>
                     <dt className="font-semibold text-ink-900">Approach</dt>
                     <dd className="mt-0.5 text-muted-foreground">

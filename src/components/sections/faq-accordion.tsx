@@ -22,14 +22,14 @@ export function FaqAccordion({ items, className }: FaqAccordionProps) {
         <Accordion.Item
           key={i}
           value={`item-${i}`}
-          className="overflow-hidden rounded-2xl border border-ink-100 bg-white transition-colors data-[state=open]:border-brand-200 data-[state=open]:bg-brand-50/30"
+          className="overflow-hidden rounded-2xl border border-ink-100 bg-white transition-colors data-[state=open]:border-accent-soft data-[state=open]:bg-accent-soft/30"
         >
           <Accordion.Header>
             <Accordion.Trigger className="group flex w-full items-center justify-between gap-4 px-6 py-5 text-left">
               <span className="text-base font-semibold text-ink-900 sm:text-lg">
                 {item.question}
               </span>
-              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink-100 text-ink-600 transition-all duration-300 group-data-[state=open]:rotate-45 group-data-[state=open]:bg-brand-600 group-data-[state=open]:text-white">
+              <span className="grid size-8 shrink-0 place-items-center rounded-full bg-ink-100 text-ink-600 transition-all duration-300 group-data-[state=open]:rotate-45 group-data-[state=open]:bg-accent group-data-[state=open]:text-white">
                 <Plus className="size-4" />
               </span>
             </Accordion.Trigger>

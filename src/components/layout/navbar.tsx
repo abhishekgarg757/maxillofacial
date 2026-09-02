@@ -14,11 +14,11 @@ import { site } from "@/content/site";
 function Logo({ onDark = false }: { onDark?: boolean }) {
   return (
     <Link href="/" className="group flex items-center gap-2.5">
-      <span className="relative grid size-10 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-lg shadow-brand-600/25">
+      <span className="relative grid size-10 place-items-center overflow-hidden rounded-xl bg-gradient-to-br from-clay-500 to-clay-700 text-white shadow-lg shadow-clay-600/25">
         <span className="font-aesthetic text-base font-extrabold tracking-tight">
           SG
         </span>
-        <span className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-accent-400/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+        <span className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-clay-400/30 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
       </span>
       <span className="flex flex-col leading-none">
         <span
@@ -32,7 +32,7 @@ function Logo({ onDark = false }: { onDark?: boolean }) {
         <span
           className={cn(
             "mt-0.5 text-[11px] font-medium tracking-wide",
-            onDark ? "text-clay-300" : "text-clay-500",
+            onDark ? "text-clay-300" : "text-clay-700",
           )}
         >
           Oral & Maxillofacial Surgery
@@ -77,10 +77,10 @@ export function Navbar() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "rounded-full px-3.5 py-2 text-sm font-medium transition-colors",
+                  "rounded-full px-3.5 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-clay-50",
                   active
                     ? "bg-clay-100 text-clay-900"
-                    : "text-clay-500 hover:bg-clay-100 hover:text-clay-900",
+                    : "text-clay-700 hover:bg-clay-100 hover:text-clay-900",
                 )}
               >
                 {link.label}
@@ -139,7 +139,7 @@ export function Navbar() {
                       href={link.href}
                       onClick={() => setOpen(false)}
                       className={cn(
-                        "rounded-xl px-4 py-3 text-base font-medium transition-colors",
+                        "rounded-xl px-4 py-3 text-base font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent",
                         active
                           ? "bg-clay-100 text-clay-900"
                           : "text-clay-600 hover:bg-clay-100",

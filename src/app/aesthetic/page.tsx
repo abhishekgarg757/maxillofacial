@@ -28,6 +28,12 @@ export const metadata: Metadata = {
     url: `${site.url}/aesthetic`,
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aesthetic Treatments · Dr. Saloni Gupta",
+    description:
+      "Precision aesthetics delivered by a surgeon. Botox, fillers, facials, and regenerative treatments.",
+  },
 };
 
 // ───────────── Content constants (data-driven) ─────────────
@@ -193,7 +199,7 @@ This is not cosmetic beauty work practiced in isolation. It is medicine applied 
       {/* ── Section 6: Injectables — Featured Individual Treatments ── */}
       <section
         id="injectables"
-        className="scroll-mt-24 bg-paper pt-20 sm:pt-28 lg:pt-32"
+        className="scroll-mt-24 bg-paper pt-20 sm:pt-28"
       >
         <div className="mx-auto px-5 sm:px-8 lg:max-w-7xl">
           <p className="font-aesthetic text-sm italic text-clay-600">

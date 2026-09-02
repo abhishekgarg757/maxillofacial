@@ -45,7 +45,7 @@ export function TestimonialCTA() {
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-12 bg-clay-400" />
-              <span className="text-xs uppercase tracking-[0.2em] font-mono text-clay-500">
+              <span className="text-xs uppercase tracking-[0.2em] font-mono text-clay-600 dark:text-clay-300">
                 Next step
               </span>
             </div>
@@ -66,7 +66,7 @@ export function TestimonialCTA() {
               </span>
             </h2>
 
-            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-600 dark:text-ink-300">
+            <p className="mt-5 max-w-xl text-lg leading-relaxed text-ink-600 dark:text-ink-100">
               Every journey here began with a single conversation. No pressure, no
               rush — just a clear plan built around you.
             </p>

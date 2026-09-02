@@ -22,6 +22,21 @@ export const metadata: Metadata = {
   description:
     "Answers to common questions about oral & maxillofacial surgery, consultations, anaesthesia, recovery, costs and emergencies at Dr. Saloni Gupta's clinic.",
   alternates: { canonical: "/faq" },
+  openGraph: {
+    title: "FAQ — Dr. Saloni Gupta",
+    description:
+      "Answers to common questions about oral & maxillofacial surgery, consultations, anaesthesia, recovery, costs and emergencies at Dr. Saloni Gupta's clinic.",
+    url: `${site.url}/faq`,
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FAQ — Dr. Saloni Gupta",
+    description:
+      "Answers to common questions about oral & maxillofacial surgery, consultations, anaesthesia, recovery, costs and emergencies at Dr. Saloni Gupta's clinic.",
+  },
 };
 
 // Combine general FAQs with procedure FAQs for richer structured data.

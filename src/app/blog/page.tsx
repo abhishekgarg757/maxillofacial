@@ -14,6 +14,21 @@ export const metadata: Metadata = {
   description:
     "Clear, evidence-informed articles on jaw surgery, dental implants, TMJ disorders and oral & maxillofacial care from Dr. Saloni Gupta.",
   alternates: { canonical: "/blog" },
+  openGraph: {
+    title: "Blog & Patient Education — Dr. Saloni Gupta",
+    description:
+      "Clear, evidence-informed articles on jaw surgery, dental implants, TMJ disorders and oral & maxillofacial care from Dr. Saloni Gupta.",
+    url: `${site.url}/blog`,
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Blog & Patient Education — Dr. Saloni Gupta",
+    description:
+      "Clear, evidence-informed articles on jaw surgery, dental implants, TMJ disorders and oral & maxillofacial care from Dr. Saloni Gupta.",
+  },
 };
 
 export default function BlogPage() {
@@ -46,10 +61,10 @@ export default function BlogPage() {
           <div className="absolute top-0 left-0 right-0 h-48 bg-grid" />
         </div>
         <div className="relative max-w-7xl mx-auto px-6 py-12 text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold tracking-tight text-ink-900 mb-4">
-            Patient Education
-          </h1>
-          <p className="text-clay-400 text-lg max-w-2xl mx-auto leading-relaxed">
+          <h2 className="text-3xl md:text-4xl font-display font-bold tracking-tight text-ink-900 mb-3">
+            From the journal
+          </h2>
+          <p className="text-clay-700 text-base max-w-2xl mx-auto leading-relaxed">
             Evidence-informed articles to help you understand your options and make confident
             decisions about your care.
           </p>

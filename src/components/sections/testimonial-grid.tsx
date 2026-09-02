@@ -58,13 +58,13 @@ export function TestimonialGrid({ testimonials }: TestimonialGridProps) {
           >
             <div className="flex items-center gap-2 mb-4">
               <div className="h-px w-12 bg-clay-400" />
-              <span className="text-xs uppercase tracking-[0.2em] font-mono text-clay-500">
+              <span className="text-xs uppercase tracking-[0.2em] font-mono text-clay-600 dark:text-clay-300">
                 The voices
               </span>
             </div>
             <h2 id="testimonials-grid-heading" className="text-3xl md:text-4xl lg:text-5xl font-display font-bold tracking-tight text-ink-950 dark:text-white leading-[1.05]">
               Every patient arrives with a
-              <span className="text-clay-500 dark:text-clay-400"> different fear</span>,
+              <span className="text-clay-700 dark:text-clay-300"> different fear</span>,
               <br className="hidden md:block" />
               and leaves with a different story.
             </h2>
@@ -97,7 +97,7 @@ export function TestimonialGrid({ testimonials }: TestimonialGridProps) {
                     "border focus:outline-none focus-visible:ring-2 focus-visible:ring-clay-500 focus-visible:ring-offset-2",
                     activeFilter === filter.value
                       ? "bg-clay-600 text-white border-clay-600 shadow-sm"
-                      : "bg-transparent text-ink-600 border-ink-200 hover:border-clay-300 hover:text-clay-600 dark:text-ink-300 dark:border-ink-700 dark:hover:border-clay-600",
+                      : "bg-transparent text-ink-600 border-ink-200 hover:border-clay-300 hover:text-clay-600 dark:text-ink-100 dark:border-ink-700 dark:hover:border-clay-600",
                   )}
                 >
                   {filter.label}
@@ -225,7 +225,7 @@ export function TestimonialGrid({ testimonials }: TestimonialGridProps) {
                         {t.procedureSlug ? (
                           <a
                             href={`/procedures/${t.procedureSlug}`}
-                            className="text-xs text-clay-600 hover:text-clay-800 dark:text-clay-400 dark:hover:text-clay-300 font-medium transition-colors underline-offset-2 hover:underline"
+                            className="text-xs text-clay-600 hover:text-clay-800 dark:text-clay-300 dark:hover:text-clay-200 font-medium transition-colors underline-offset-2 hover:underline"
                           >
                             {t.context}
                           </a>

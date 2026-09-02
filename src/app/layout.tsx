@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { ChatWidget } from "@/components/chat/chat-widget";
+import { ChatWidgetLoader } from "@/components/chat/chat-widget-loader";
 import { site } from "@/content/site";
 import { jsonLdScript, organizationJsonLd } from "@/lib/jsonld";
 import "./globals.css";
@@ -96,10 +96,18 @@ export default function RootLayout({
         <script {...jsonLdScript(organizationJsonLd())} />
       </head>
       <body className="flex min-h-full flex-col bg-background font-inter">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-clay-950 focus:px-3 focus:py-2 focus:text-sm focus:text-white focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <Navbar />
-        <main className="flex-1 font-aesthetic">{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
         <Footer />
-        <ChatWidget />
+        <ChatWidgetLoader />
         <Analytics />
         <SpeedInsights />
       </body>

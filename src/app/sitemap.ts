@@ -1,7 +1,7 @@
 import type { MetadataRoute } from "next";
 
 import { procedureSlugs } from "@/content/procedures";
-import { getPostSlugs } from "@/lib/blog";
+import { getAllPosts } from "@/lib/blog";
 import { site } from "@/content/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -34,9 +34,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  const blogRoutes = getPostSlugs().map((slug) => ({
-    url: `${site.url}/blog/${slug}`,
-    lastModified: now,
+  const blogRoutes = getAllPosts().map((p) => ({
+    url: `${site.url}/blog/${p.slug}`,
+    lastModified: new Date(p.date),
     changeFrequency: "monthly" as const,
     priority: 0.6,
   }));

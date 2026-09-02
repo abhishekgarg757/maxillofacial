@@ -1,4 +1,5 @@
 import { site } from "@/content/site";
+import { procedures } from "@/content/procedures";
 
 const ORG_ID = `${site.url}/#clinic`;
 const PHYSICIAN_ID = `${site.url}/#physician`;
@@ -9,14 +10,29 @@ export function organizationJsonLd() {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": ["MedicalClinic", "LocalBusiness"],
+        "@type": ["MedicalClinic", "MedicalBusiness", "LocalBusiness"],
         "@id": ORG_ID,
         name: site.name,
+        alternateName: site.shortName,
         url: site.url,
+        // TODO(Track B): replace with the real social/profile image.
+        image: `${site.url}/opengraph-image.png`,
+        logo: `${site.url}/opengraph-image.png`,
         email: site.email,
         telephone: site.phoneE164,
+        // TODO(Track B): pricing posture — keep unset unless the clinic decides
+        // to publish a range online (medical-content-reviewer policy).
         description: site.description,
         medicalSpecialty: "OralAndMaxillofacialSurgery",
+        currenciesAccepted: "INR",
+        paymentAccepted: "Cash, Credit Card, Debit Card, UPI",
+        knowsLanguage: ["en-IN", "hi"],
+        availableService: procedures.map((p) => ({
+          "@type": "MedicalProcedure",
+          name: p.title,
+          url: `${site.url}/procedures/${p.slug}`,
+        })),
+        // TODO(Track B): supply real lat/lng once the clinic address is finalised.
         address: {
           "@type": "PostalAddress",
           streetAddress: `${site.address.line1}, ${site.address.line2}`,
@@ -28,15 +44,21 @@ export function organizationJsonLd() {
         areaServed: { "@type": "City", name: site.address.city },
         openingHoursSpecification: site.hours.map((h) => ({
           "@type": "OpeningHoursSpecification",
-          description: `${h.day}: ${h.time}`,
+          dayOfWeek: h.schemaDay,
+          opens: h.opens,
+          closes: h.closes,
         })),
+        sameAs: site.socials.map((s) => s.href),
       },
       {
         "@type": "Physician",
         "@id": PHYSICIAN_ID,
         name: site.doctorName,
         url: site.url,
+        // TODO(Track B): replace with a real doctor portrait.
+        image: `${site.url}/doctor-portrait.svg`,
         medicalSpecialty: "OralAndMaxillofacialSurgery",
+        knowsLanguage: ["en-IN", "hi"],
         worksFor: { "@id": ORG_ID },
         memberOf: { "@id": ORG_ID },
       },
@@ -151,14 +173,28 @@ export function aggregateRatingJsonLd(reviews: { rating: number; author: string;
   };
 }
 
-/** Combined Review + AggregateRating graph for testimonials page. */
+/**
+ * Combined Review + AggregateRating graph for the testimonials page.
+ *
+ * TODO(Track B): the underlying `testimonials` data is illustrative until
+ * Dr. Gupta signs off on real, consented cases. To stay off Google's
+ * structured-data manual-action radar we emit a neutral `ItemList` instead
+ * of fabricated `Review` / `AggregateRating` entries. Once consent is
+ * confirmed, gate the original graph behind a feature flag and restore it.
+ */
 export function testimonialsJsonLd(testimonials: { author: string; quote: string; rating: number; date?: string; procedureSlug?: string }[]) {
   return {
     "@context": "https://schema.org",
-    "@graph": [
-      aggregateRatingJsonLd(testimonials),
-      ...testimonials.map((t) => reviewJsonLd(t)),
-    ],
+    "@type": "ItemList",
+    name: "Patient stories (illustrative)",
+    description:
+      "Illustrative patient stories about oral & maxillofacial procedures. Real cases will be published once patient consent is documented.",
+    itemListElement: testimonials.map((t, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: t.author,
+      description: t.quote,
+    })),
   };
 }
 

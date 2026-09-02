@@ -5,93 +5,268 @@
 
 /*
   Design tokens — Dr. Saloni Gupta OMFS
-  Direction: Modern & bold. Dark hero + light, airy sections.
-  Brand = deep teal/cyan (trust, clinical). Accent = warm coral (CTAs).
+  Direction: Medical-luxury editorial, warm-neutral premium.
+  Brand = warm ivory / soft off-white foundation.
+  Accent = restrained premium signal, used sparingly.
 */
+
 @theme {
-  /* Brand — teal / cyan */
-  --color-brand-50: oklch(0.984 0.014 196);
-  --color-brand-100: oklch(0.956 0.035 196);
-  --color-brand-200: oklch(0.91 0.064 196);
-  --color-brand-300: oklch(0.852 0.092 195);
-  --color-brand-400: oklch(0.78 0.115 194);
-  --color-brand-500: oklch(0.704 0.13 193);
-  --color-brand-600: oklch(0.6 0.118 194);
-  --color-brand-700: oklch(0.5 0.098 196);
-  --color-brand-800: oklch(0.42 0.078 198);
-  --color-brand-900: oklch(0.36 0.06 200);
-  --color-brand-950: oklch(0.255 0.045 203);
+  /* --- Core Neutrals --- */
 
-  /* Accent — warm coral */
-  --color-accent-50: oklch(0.971 0.018 25);
-  --color-accent-100: oklch(0.944 0.036 24);
-  --color-accent-200: oklch(0.897 0.07 22);
-  --color-accent-300: oklch(0.838 0.106 22);
-  --color-accent-400: oklch(0.765 0.15 23);
-  --color-accent-500: oklch(0.706 0.18 24);
-  --color-accent-600: oklch(0.638 0.196 26);
-  --color-accent-700: oklch(0.558 0.18 27);
-  --color-accent-800: oklch(0.476 0.15 28);
-  --color-accent-900: oklch(0.414 0.122 29);
+  /* Background: warm ivory / soft off-white */
+  --color-background: oklch(0.97 0.003 30);
 
-  /* Ink — deep slate for dark sections */
-  --color-ink-50: oklch(0.984 0.003 240);
-  --color-ink-100: oklch(0.968 0.005 240);
-  --color-ink-200: oklch(0.929 0.008 240);
-  --color-ink-300: oklch(0.869 0.012 240);
-  --color-ink-400: oklch(0.704 0.016 240);
-  --color-ink-500: oklch(0.554 0.018 240);
-  --color-ink-600: oklch(0.446 0.02 242);
-  --color-ink-700: oklch(0.372 0.022 244);
-  --color-ink-800: oklch(0.279 0.022 248);
-  --color-ink-900: oklch(0.208 0.021 252);
-  --color-ink-950: oklch(0.139 0.018 256);
+  /* Surface: warm stone / muted taupe for section backgrounds */
+  --color-surface: oklch(0.965 0.012 40);
+  --color-surface-soft: oklch(0.98 0.006 35);
+  --color-surface-dark: oklch(0.94 0.02 38);
 
-  /* Semantic */
-  --color-background: oklch(1 0 0);
-  --color-foreground: var(--color-ink-900);
-  --color-muted: var(--color-ink-100);
-  --color-muted-foreground: var(--color-ink-500);
-  --color-border: oklch(0.922 0.006 240);
+  /* Text: primary, secondary, muted */
+  --color-text-primary: oklch(0.2 0.008 30);
+  --color-text-secondary: oklch(0.4 0.012 30);
+  --color-text-muted: oklch(0.5 0.018 32);
+
+  /* Border: subtle, not dominant */
+  --color-border: oklch(0.85 0.01 30);
+
+  /* Accent: restrained premium signal — used for primary CTA, active nav */
+  --color-accent: oklch(0.45 0.02 25);
+  --color-accent-hover: oklch(0.48 0.022 26);
+  --color-accent-soft: oklch(0.94 0.01 20);
+
+  /* --- Semantic --- */
+
+  /* Success, warning, error can remain if needed, but used sparingly */
+  --color-success: oklch(0.4 0.08 140);
+  --color-warning: oklch(0.5 0.1 50);
+  --color-error: oklch(0.4 0.14 20);
+
+  /* Paper variant for aesthetic sections (warm paper canvas) */
+  --color-paper: oklch(0.97 0.008 32);
+  --color-paper-deep: oklch(0.95 0.014 34);
+
+  /* Clay variant for subtle elevation (replaces heavy shadows) */
+  --color-clay-50: oklch(0.98 0.01 42);
+  --color-clay-100: oklch(0.96 0.02 42);
+  --color-clay-200: oklch(0.92 0.034 42);
+  --color-clay-300: oklch(0.86 0.05 42);
+  --color-clay-400: oklch(0.78 0.07 42);
+  --color-clay-500: oklch(0.68 0.09 42);
+  --color-clay-600: oklch(0.58 0.1 42);
+  --color-clay-700: oklch(0.48 0.11 42);
+  --color-clay-800: oklch(0.39 0.11 42);
+  --color-clay-900: oklch(0.3 0.09 42);
+  --color-clay-950: oklch(0.22 0.07 42);
+
+  /* --- Brand ramp (teal — trust accents used by ~30 dependent files) --- */
+  --color-brand-50:  oklch(0.97 0.018 195);
+  --color-brand-100: oklch(0.93 0.04 195);
+  --color-brand-200: oklch(0.86 0.07 195);
+  --color-brand-300: oklch(0.78 0.09 195);
+  --color-brand-400: oklch(0.68 0.11 195);
+  --color-brand-500: oklch(0.58 0.12 195);
+  --color-brand-600: oklch(0.5 0.12 195);
+  --color-brand-700: oklch(0.42 0.11 195);
+  --color-brand-800: oklch(0.34 0.09 195);
+  --color-brand-900: oklch(0.26 0.07 195);
+  --color-brand-950: oklch(0.18 0.05 195);
+
+  /* --- Ink ramp (warm neutral — text + dark sections).
+     Re-keyed from cool slate (hue 250) to a low-chroma warm neutral
+     (hue 30) so text on warm clay surfaces doesn't read cool-on-warm. --- */
+  --color-ink-50:  oklch(0.98 0.004 30);
+  --color-ink-100: oklch(0.96 0.006 30);
+  --color-ink-200: oklch(0.9 0.008 30);
+  --color-ink-300: oklch(0.8 0.01 30);
+  --color-ink-400: oklch(0.65 0.012 30);
+  --color-ink-500: oklch(0.5 0.014 30);
+  --color-ink-600: oklch(0.42 0.016 30);
+  --color-ink-700: oklch(0.34 0.014 30);
+  --color-ink-800: oklch(0.26 0.012 30);
+  --color-ink-900: oklch(0.2 0.01 30);
+  --color-ink-950: oklch(0.14 0.008 30);
+
+  /* --- Full accent ramp (coral — the bare --color-accent is the muted-taupe
+     direction; the ramp restores CTA colors used by other files) --- */
+  --color-accent-50:  oklch(0.97 0.018 30);
+  --color-accent-100: oklch(0.93 0.04 30);
+  --color-accent-200: oklch(0.86 0.07 30);
+  --color-accent-300: oklch(0.78 0.1 30);
+  --color-accent-400: oklch(0.7 0.13 30);
+  --color-accent-500: oklch(0.6 0.15 30);
+  --color-accent-600: oklch(0.5 0.16 30);
+  --color-accent-700: oklch(0.42 0.15 30);
+  --color-accent-800: oklch(0.34 0.12 30);
+  --color-accent-900: oklch(0.26 0.09 30);
+
+  /* --- Legacy semantic aliases (semantic colors expected by primitives) --- */
   --color-card: oklch(1 0 0);
-  --color-ring: var(--color-brand-500);
+  --color-foreground: var(--color-text-primary);
+  --color-ring: var(--color-accent);
+  --color-muted: var(--color-text-muted);
+  --color-muted-foreground: var(--color-text-muted);
 
-  /* Aesthetic page — editorial identity (warm paper canvas + terracotta) */
-  --color-paper: oklch(0.976 0.01 85);
-  --color-paper-deep: oklch(0.952 0.014 85);
-  --color-clay-50: oklch(0.976 0.018 42);
-  --color-clay-100: oklch(0.948 0.034 42);
-  --color-clay-200: oklch(0.892 0.066 42);
-  --color-clay-300: oklch(0.804 0.096 42);
-  --color-clay-400: oklch(0.722 0.122 42);
-  --color-clay-500: oklch(0.628 0.138 42);
-  --color-clay-600: oklch(0.552 0.148 42);
-  --color-clay-700: oklch(0.47 0.13 42);
-  --color-clay-800: oklch(0.388 0.11 42);
-  --color-clay-900: oklch(0.298 0.082 42);
-  --color-clay-950: oklch(0.215 0.054 42);
+  /* --- Radii --- */
 
-  /* Fonts (wired via next/font CSS variables in layout) */
+  --radius-small: 6px;
+  --radius-medium: 12px;
+  --radius-large: 16px;
+  --radius-xlarge: 24px;
+  --radius-full: 9999px;
+
+  /* --- Fonts (wired via next/font CSS variables in layout) --- */
+
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-display), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-display: var(--font-sora), var(--font-inter), ui-sans-serif, sans-serif;
   --font-aesthetic: var(--font-fraunces), Georgia, ui-serif, serif;
 
-  /* Radii */
-  --radius-xl: 1rem;
-  --radius-2xl: 1.5rem;
-  --radius-3xl: 2rem;
+  /* --- Easing + timing --- */
 
-  /* Easing + timing */
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
+  --ease-in-out-cubic: cubic-bezier(0.645, 0.045, 0.355, 1.5);
 
-  /* Animations */
+  /* --- Animations --- */
+
   --animate-marquee: marquee 40s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-aurora: aurora 18s ease-in-out infinite alternate;
-  --animate-fade-in: fade-in 0.25s ease;
+  --animate-fade-in: fade-in 0.25s var(--ease-out-expo);
   --animate-slide-in-right: slide-in-right 0.32s var(--ease-out-expo);
   --animate-scale-in: scale-in 0.22s var(--ease-out-expo);
+  --animate-aurora: aurora 12s ease-in-out infinite;
 }
+
+/* Before/after slider handle — visible focus ring */
+[data-rcs="handle-root"]:focus-visible {
+  outline: 3px solid var(--color-accent) !important;
+  outline-offset: 2px;
+}
+
+/* Reduced motion — top-level (was nested inside @theme, which is unsafe) */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================================
+   Base root — dark mode support
+   ============================================================ */
+
+:root {
+  color-scheme: light;
+  /* dark mode token overrides can go here if needed */
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================================
+   Selection
+   ============================================================ */
+
+::selection {
+  background: var(--color-accent-soft);
+  color: var(--color-text-primary);
+}
+
+/* ============================================================
+   Headings use the display font + tight tracking for a bold look.
+   NOTE: the actual font swap is applied further down in the
+   "Serif font" block, which is the canonical rule for h1-h6.
+   ============================================================ */
+
+/* Utility: text gradient — used only for small emphasis, not headings */
+.text-gradient {
+  background: linear-gradient(
+    100deg,
+    var(--color-accent),
+    var(--color-accent) 40%,
+    var(--color-accent-hover)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============================================================
+   Thin, modern scrollbar
+   ============================================================ */
+
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-text-muted);
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-background);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-secondary);
+  }
+}
+
+/* ============================================================
+   Serif font: headings use Fraunces/Georgia via font-aesthetic;
+    body stays sans-serif (Inter/Sora) for body text.
+   ============================================================ */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-aesthetic);
+  letter-spacing: -0.02em;
+}
+
+/* ============================================================
+   Utility: subtle grid backdrop for dark/neutral sections
+   ============================================================ */
+
+.bg-grid {
+  background-image: linear-gradient(
+    to right,
+    color-mix(in oklch, white 6%, transparent) 1px,
+    transparent 1px
+  ),
+  linear-gradient(
+    to bottom,
+    color-mix(in oklch, white 6%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 64px 64px;
+}
+
+/* ============================================================
+   Respect reduced motion globally
+   ============================================================ */
+
+/* (Top-level @media block above already covers .bg-grid via the universal selector.) */
+
+/* ============================================================
+   Buttons — updated to match new palette
+   ============================================================ */
 
 @keyframes fade-in {
   from {
@@ -122,6 +297,34 @@
   }
 }
 
+/* --- Marquee (testimonials wall) --- */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- Aurora (hero glow drift) --- */
+@keyframes aurora {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translate(40px, -20px) scale(1.05);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(-30px, 20px) scale(0.95);
+    opacity: 0.5;
+  }
+}
+
+/* --- Radix-accordion open/close height transitions --- */
 @keyframes acc-down {
   from {
     height: 0;
@@ -142,146 +345,4 @@
     height: 0;
     opacity: 0;
   }
-}
-
-@keyframes marquee {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-50%);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-14px);
-  }
-}
-
-@keyframes aurora {
-  0% {
-    transform: translate3d(0, 0, 0) rotate(0deg) scale(1);
-  }
-  50% {
-    transform: translate3d(4%, -3%, 0) rotate(8deg) scale(1.1);
-  }
-  100% {
-    transform: translate3d(-3%, 4%, 0) rotate(-6deg) scale(1.05);
-  }
-}
-
-:root {
-  color-scheme: light;
-}
-
-* {
-  border-color: var(--color-border);
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  background: var(--color-background);
-  color: var(--color-foreground);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-}
-
-/* Selection */
-::selection {
-  background: var(--color-brand-200);
-  color: var(--color-ink-900);
-}
-
-/* Headings use the display font + tight tracking for a bold look */
-h1,
-h2,
-h3,
-h4 {
-  font-family: var(--font-display);
-  letter-spacing: -0.02em;
-}
-
-/* Thin, modern scrollbar */
-@media (pointer: fine) {
-  ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-  }
-  ::-webkit-scrollbar-thumb {
-    background: var(--color-ink-300);
-    border-radius: 9999px;
-    border: 2px solid var(--color-background);
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-ink-400);
-  }
-}
-
-/* Serif font: headings use Fraunces/Georgia via font-aesthetic;
-   body stays sans-serif (Inter) for body text. */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-aesthetic);
-  letter-spacing: -0.02em;
-}
-
-/* Utility: subtle grid backdrop for dark sections */
-.bg-grid {
-  background-image: linear-gradient(
-      to right,
-      color-mix(in oklch, white 6%, transparent) 1px,
-      transparent 1px
-    ),
-    linear-gradient(
-      to bottom,
-      color-mix(in oklch, white 6%, transparent) 1px,
-      transparent 1px
-    );
-  background-size: 56px 56px;
-}
-
-/* Utility: text gradient */
-.text-gradient {
-  background: linear-gradient(
-    100deg,
-    var(--color-brand-300),
-    var(--color-brand-500) 40%,
-    var(--color-accent-400)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Respect reduced motion globally */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
-}
-
-/* Before/after slider handle — restore a visible keyboard focus ring.
-   react-compare-slider sets inline `outline: 0` on its focusable root
-   (`[data-rcs="handle-root"]`), which removes the focus indicator. */
-[data-rcs="handle-root"]:focus-visible {
-  outline: 3px solid var(--color-brand-500) !important;
-  outline-offset: 2px;
 }
