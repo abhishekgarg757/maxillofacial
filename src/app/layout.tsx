@@ -5,7 +5,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { ChatWidgetLoader } from "@/components/chat/chat-widget-loader";
+import { WhatsAppLauncher } from "@/components/chat/whatsapp-launcher";
 import { site } from "@/content/site";
 import { jsonLdScript, organizationJsonLd } from "@/lib/jsonld";
 import "./globals.css";
@@ -107,7 +107,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <ChatWidgetLoader />
+        <WhatsAppLauncher />
         <Analytics />
         <SpeedInsights />
       </body>

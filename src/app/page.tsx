@@ -9,12 +9,14 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal";
 import { Hero } from "@/components/sections/hero";
 import { StatsBand } from "@/components/sections/stats-band";
 import { ProcedureCard } from "@/components/sections/procedure-card";
+import { AestheticCategoryCard } from "@/components/sections/aesthetic-category-card";
 import { BeforeAfterSliderLazy } from "@/components/sections/before-after-slider-lazy";
 import { WhyChoose } from "@/components/sections/why-choose";
 import { TestimonialMarquee } from "@/components/sections/testimonials";
 import { BlogCard } from "@/components/sections/blog-card";
 import { CtaBand } from "@/components/sections/cta-band";
 import { procedures } from "@/content/procedures";
+import { aestheticCategories } from "@/content/aesthetic-categories";
 import { beforeAfterCases } from "@/content/before-after";
 import { getAllPosts } from "@/lib/blog";
 import { site } from "@/content/site";
@@ -67,6 +69,30 @@ export default function Home() {
           <Button asChild size="lg" variant="outline">
             <Link href="/procedures">
               View all procedures
+              <ArrowRight />
+            </Link>
+          </Button>
+        </div>
+      </Section>
+
+      {/* Aesthetic Treatments */}
+      <Section id="aesthetics">
+        <SectionHeading
+          eyebrow="Aesthetic care"
+          title="Precision aesthetics, delivered by a surgeon"
+          description="Non-surgical treatments informed by surgical-grade anatomical knowledge — facials, injectables, and regenerative care, each tailored in consultation."
+        />
+        <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {aestheticCategories.map((c, i) => (
+            <StaggerItem key={c.slug} index={i} className="h-full">
+              <AestheticCategoryCard category={c} />
+            </StaggerItem>
+          ))}
+        </Stagger>
+        <div className="mt-12 flex justify-center">
+          <Button asChild size="lg" variant="outline">
+            <Link href="/aesthetic">
+              Explore aesthetic treatments
               <ArrowRight />
             </Link>
           </Button>
