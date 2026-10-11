@@ -21,7 +21,7 @@ export default function PrivacyPage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Privacy" }]}
       />
       <Section>
-        <div className="prose prose-lg mx-auto max-w-3xl prose-headings:font-display prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-a:text-brand-700">
+        <div className="prose prose-lg mx-auto max-w-3xl prose-headings:font-display prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-a:text-accent">
           <p className="text-sm text-muted-foreground">
             This is a template policy provided for convenience and is not legal
             advice. It should be reviewed and adapted (including for India&apos;s

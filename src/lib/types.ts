@@ -64,6 +64,10 @@ export interface Testimonial {
   /** e.g. "Orthognathic surgery patient". */
   context: string;
   rating: number;
+  /** ISO date string for datePublished in Review schema (optional for draft). */
+  date?: string;
+  /** Optional slug to link to procedure page. */
+  procedureSlug?: string;
 }
 
 export interface BeforeAfterCase {
@@ -93,6 +97,35 @@ export interface Stat {
   icon?: string;
 }
 
+/**
+ * One day-of-week entry in {@link SiteConfig.hours}.
+ *
+ * `day` is rendered in the UI (footer, contact page). `opens` and `closes`
+ * are local-time `HH:MM` strings used to build the schema.org
+ * `OpeningHoursSpecification` graph for Google's Rich Results.
+ *
+ * If the clinic is closed on a given day, omit the entry. We do not emit a
+ * `closed` day in the JSON-LD because schema.org does not have a clean
+ * "closed" representation; absence is the correct signal.
+ */
+export interface OpeningHour {
+  /** Display label, e.g. "Monday", "Mon – Fri", "Saturday". */
+  day: string;
+  /** ISO-8601 day-of-week URL: https://schema.org/Monday … Sunday. */
+  schemaDay:
+    | "Monday"
+    | "Tuesday"
+    | "Wednesday"
+    | "Thursday"
+    | "Friday"
+    | "Saturday"
+    | "Sunday";
+  /** Local opening time, `HH:MM` 24h, e.g. "10:00". */
+  opens: string;
+  /** Local closing time, `HH:MM` 24h, e.g. "19:00". */
+  closes: string;
+}
+
 export interface SiteConfig {
   name: string;
   doctorName: string;
@@ -115,9 +148,81 @@ export interface SiteConfig {
     country: string;
     mapQuery: string;
   };
-  hours: { day: string; time: string }[];
+  hours: OpeningHour[];
   socials: { label: string; href: string; icon: string }[];
   nav: NavLink[];
+}
+
+export interface Certification {
+  /** Course or program title. */
+  title: string;
+  /** Issuing body or institution. */
+  issuingBody: string;
+  /** Year of completion (optional). */
+  year?: string;
+  /** Path to certificate photograph or scan (optional). */
+  certificateImage?: string;
+  /** Brief note about what was covered (optional). */
+  description?: string;
+}
+
+/** Doctor profile extended with aesthetic-specific training. */
+export interface ExtendedDoctor {
+  /** Existing doctor data (merge with src/content/doctor.ts fields). */
+  name: string;
+  credentials: string;
+  role: string;
+  location: string;
+  portrait: string;
+  intro: string;
+  philosophy: Array<{
+    title: string;
+    body: string;
+    icon: string;
+  }>;
+  timeline: Array<{
+    year: string;
+    title: string;
+    detail: string;
+  }>;
+  memberships: string[];
+  /** Aesthetic medicine courses completed. */
+  aestheticCertifications: Certification[];
+  /** Photographs from training events (optional). */
+  trainingPhotos: string[];
+  /** Philosophy paragraph for aesthetic narrative (optional). */
+  aestheticPhilosophy?: string;
+}
+
+export interface AestheticTreatmentSection {
+  heading: string;
+  body: string;
+  points?: string[];
+}
+
+export interface AestheticTreatment {
+  /** URL-safe slug, e.g. "hydrafacial", "botox", "thread-lift" */
+  slug: string;
+  displayTitle: string;
+  tagline: string;
+  summary: string;
+  category: "facials" | "injectables" | "regenerative";
+  sections: AestheticTreatmentSection[];
+  indications: string[];
+  benefits: string[];
+  risks: string[];
+  /** Session length, e.g. "30–60 minutes" */
+  treatmentDuration?: string;
+  /** Time before normal activities resume */
+  downtime?: string;
+  /** How long results typically last */
+  longevity?: string;
+  /** Setting/approach, e.g. "In-clinic, no anaesthesia required" */
+  sessionType?: string;
+  faqs: FAQ[];
+  sources: Source[];
+  /** Path to hero/treatment photograph */
+  heroImage?: string;
 }
 
 export type IconMap = Record<string, LucideIcon>;

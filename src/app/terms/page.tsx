@@ -20,7 +20,7 @@ export default function TermsPage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Terms" }]}
       />
       <Section>
-        <div className="prose prose-lg mx-auto max-w-3xl prose-headings:font-display prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-a:text-brand-700">
+        <div className="prose prose-lg mx-auto max-w-3xl prose-headings:font-display prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-a:text-accent">
           <p className="text-sm text-muted-foreground">
             This is a template provided for convenience and is not legal advice.
             Please review and adapt before publication.

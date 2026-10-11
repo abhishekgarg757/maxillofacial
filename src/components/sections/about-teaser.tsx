@@ -15,8 +15,8 @@ export function AboutTeaser() {
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal direction="right">
             <div className="relative">
-              <div className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-brand-200/60 to-accent-200/40 blur-2xl" />
-              <div className="relative overflow-hidden rounded-[2rem] border border-ink-100 bg-ink-950 shadow-2xl">
+              <div className="absolute -inset-4 -z-10 rounded-[2.5rem] bg-gradient-to-br from-clay-200/60 to-clay-300/40 blur-2xl" />
+              <div className="relative overflow-hidden rounded-[2rem] border border-ink-100 bg-clay-900 shadow-2xl">
                 <Image
                   src={doctor.portrait}
                   alt={`Portrait of ${doctor.name}`}
@@ -27,7 +27,7 @@ export function AboutTeaser() {
                 />
               </div>
               <div className="absolute -bottom-5 -right-3 flex items-center gap-3 rounded-2xl border border-ink-100 bg-white/90 px-5 py-4 shadow-xl backdrop-blur sm:right-6">
-                <BadgeCheck className="size-8 text-brand-600" />
+                <BadgeCheck className="size-8 text-accent" />
                 <div className="leading-tight">
                   <p className="text-sm font-bold text-ink-900">{doctor.role}</p>
                   <p className="text-xs text-muted-foreground">
@@ -59,7 +59,7 @@ export function AboutTeaser() {
                     key={p.title}
                     className="flex items-center gap-2.5 text-sm font-medium text-ink-700"
                   >
-                    <BadgeCheck className="size-5 shrink-0 text-brand-600" />
+                    <BadgeCheck className="size-5 shrink-0 text-accent" />
                     {p.title}
                   </li>
                 ))}

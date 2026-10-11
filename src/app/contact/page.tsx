@@ -14,6 +14,21 @@ export const metadata: Metadata = {
   description:
     "Book a consultation with Dr. Saloni Gupta or get in touch — by form, phone, email or WhatsApp. Oral & maxillofacial surgery in New Delhi.",
   alternates: { canonical: "/contact" },
+  openGraph: {
+    title: "Contact & Book — Dr. Saloni Gupta",
+    description:
+      "Book a consultation with Dr. Saloni Gupta or get in touch — by form, phone, email or WhatsApp. Oral & maxillofacial surgery in New Delhi.",
+    url: `${site.url}/contact`,
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact & Book — Dr. Saloni Gupta",
+    description:
+      "Book a consultation with Dr. Saloni Gupta or get in touch — by form, phone, email or WhatsApp. Oral & maxillofacial surgery in New Delhi.",
+  },
 };
 
 const mapEmbed = `https://www.google.com/maps?q=${encodeURIComponent(
@@ -76,7 +91,7 @@ export default function ContactPage() {
                     external
                   />
                   <li className="flex items-start gap-3">
-                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700">
+                    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
                       <MapPin className="size-5" />
                     </span>
                     <div className="text-sm">
@@ -94,19 +109,25 @@ export default function ContactPage() {
 
               <div className="rounded-3xl border border-ink-100 bg-white p-6 shadow-sm">
                 <h2 className="flex items-center gap-2 font-display text-lg font-bold text-ink-900">
-                  <Clock className="size-5 text-brand-600" />
+                  <Clock className="size-5 text-accent" />
                   Opening hours
                 </h2>
                 <ul className="mt-4 flex flex-col gap-2.5 text-sm">
                   {site.hours.map((h) => (
                     <li
-                      key={h.day}
+                      key={h.schemaDay}
                       className="flex items-center justify-between gap-4 border-b border-ink-50 pb-2.5 last:border-0 last:pb-0"
                     >
                       <span className="text-ink-700">{h.day}</span>
-                      <span className="font-medium text-ink-900">{h.time}</span>
+                      <span className="font-medium text-ink-900">
+                        {h.opens} – {h.closes}
+                      </span>
                     </li>
                   ))}
+                  <li className="flex items-center justify-between gap-4 pb-0 text-ink-500">
+                    <span>Sunday</span>
+                    <span className="font-medium">Closed</span>
+                  </li>
                 </ul>
               </div>
 
@@ -142,7 +163,7 @@ function ContactRow({
 }) {
   return (
     <li className="flex items-start gap-3">
-      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700">
+      <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-accent-soft text-accent">
         {icon}
       </span>
       <div className="text-sm">
@@ -152,7 +173,7 @@ function ContactRow({
           {...(external
             ? { target: "_blank", rel: "noopener noreferrer" }
             : {})}
-          className="text-muted-foreground transition-colors hover:text-brand-700"
+          className="text-muted-foreground transition-colors hover:text-accent"
         >
           {value}
         </a>

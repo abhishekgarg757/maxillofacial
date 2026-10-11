@@ -15,6 +15,21 @@ export const metadata: Metadata = {
   description:
     "Drag-to-compare before & after examples of oral & maxillofacial procedures — jaw alignment, dental implants, chin correction and facial trauma repair.",
   alternates: { canonical: "/before-after" },
+  openGraph: {
+    title: "Before & After — Dr. Saloni Gupta",
+    description:
+      "Drag-to-compare before & after examples of oral & maxillofacial procedures — jaw alignment, dental implants, chin correction and facial trauma repair.",
+    url: `${site.url}/before-after`,
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Before & After — Dr. Saloni Gupta",
+    description:
+      "Drag-to-compare before & after examples of oral & maxillofacial procedures — jaw alignment, dental implants, chin correction and facial trauma repair.",
+  },
 };
 
 export default function BeforeAfterPage() {
@@ -37,8 +52,8 @@ export default function BeforeAfterPage() {
 
       <Section>
         <Reveal>
-          <div className="mb-10 flex items-start gap-3 rounded-2xl border border-brand-100 bg-brand-50/60 p-5">
-            <Info className="mt-0.5 size-5 shrink-0 text-brand-600" />
+          <div className="mb-10 flex items-start gap-3 rounded-2xl border border-clay-200 bg-clay-50/60 p-5">
+            <Info className="mt-0.5 size-5 shrink-0 text-accent" />
             <p className="text-sm leading-relaxed text-ink-700">
               <span className="font-semibold text-ink-900">
                 About these images:

@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Sora } from "next/font/google";
+import { Inter, Sora, Fraunces } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { ChatWidget } from "@/components/chat/chat-widget";
+import { WhatsAppLauncher } from "@/components/chat/whatsapp-launcher";
 import { site } from "@/content/site";
 import { jsonLdScript, organizationJsonLd } from "@/lib/jsonld";
 import "./globals.css";
@@ -20,6 +20,16 @@ const sora = Sora({
   variable: "--font-display",
   subsets: ["latin"],
   weight: ["500", "600", "700", "800"],
+  display: "swap",
+});
+
+/** Fraunces serif font — used as `font-aesthetic` site-wide for headings /
+ * editorial text, matching the aesthetic/testimonials page design. */
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  style: ["italic", "normal"],
+  variable: "--font-fraunces",
   display: "swap",
 });
 
@@ -80,16 +90,24 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${sora.variable} h-full antialiased`}
+      className={`${inter.variable} ${sora.variable} ${fraunces.variable} h-full antialiased`}
     >
       <head>
         <script {...jsonLdScript(organizationJsonLd())} />
       </head>
-      <body className="flex min-h-full flex-col bg-background">
+      <body className="flex min-h-full flex-col bg-background font-inter">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:rounded-md focus:bg-clay-950 focus:px-3 focus:py-2 focus:text-sm focus:text-white focus:shadow-lg"
+        >
+          Skip to main content
+        </a>
         <Navbar />
-        <main className="flex-1">{children}</main>
+        <main id="main" className="flex-1">
+          {children}
+        </main>
         <Footer />
-        <ChatWidget />
+        <WhatsAppLauncher />
         <Analytics />
         <SpeedInsights />
       </body>

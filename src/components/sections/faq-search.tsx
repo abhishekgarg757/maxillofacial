@@ -41,7 +41,7 @@ export function FaqSearch({
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Search questions…"
           aria-label="Search frequently asked questions"
-          className="h-13 w-full rounded-2xl border border-ink-200 bg-white pl-12 pr-4 text-base text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-brand-400 focus:ring-2 focus:ring-brand-100"
+          className="h-13 w-full rounded-2xl border border-ink-200 bg-white pl-12 pr-4 text-base text-ink-900 outline-none transition-colors placeholder:text-ink-400 focus:border-accent focus:ring-2 focus:ring-accent-soft"
         />
       </div>
 
@@ -55,8 +55,8 @@ export function FaqSearch({
             className={cn(
               "rounded-full border px-4 py-2 text-sm font-medium transition-colors",
               active === tab
-                ? "border-brand-500 bg-brand-50 text-brand-700"
-                : "border-ink-200 text-ink-600 hover:border-brand-300 hover:text-ink-900",
+                ? "border-accent bg-accent-soft text-accent"
+                : "border-ink-200 text-ink-600 hover:border-accent-soft hover:text-ink-900",
             )}
           >
             {tab}
@@ -69,7 +69,7 @@ export function FaqSearch({
       ) : (
         <p className="rounded-2xl border border-ink-100 bg-ink-50 px-5 py-8 text-center text-sm text-muted-foreground">
           No questions match your search. Try a different term, or{" "}
-          <a href="/contact" className="font-semibold text-brand-700 underline">
+          <a href="/contact" className="font-semibold text-accent underline">
             ask us directly
           </a>
           .

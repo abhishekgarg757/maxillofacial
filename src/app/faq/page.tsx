@@ -22,6 +22,21 @@ export const metadata: Metadata = {
   description:
     "Answers to common questions about oral & maxillofacial surgery, consultations, anaesthesia, recovery, costs and emergencies at Dr. Saloni Gupta's clinic.",
   alternates: { canonical: "/faq" },
+  openGraph: {
+    title: "FAQ — Dr. Saloni Gupta",
+    description:
+      "Answers to common questions about oral & maxillofacial surgery, consultations, anaesthesia, recovery, costs and emergencies at Dr. Saloni Gupta's clinic.",
+    url: `${site.url}/faq`,
+    siteName: site.name,
+    locale: site.locale,
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FAQ — Dr. Saloni Gupta",
+    description:
+      "Answers to common questions about oral & maxillofacial surgery, consultations, anaesthesia, recovery, costs and emergencies at Dr. Saloni Gupta's clinic.",
+  },
 };
 
 // Combine general FAQs with procedure FAQs for richer structured data.
@@ -49,6 +64,7 @@ export default function FaqPage() {
         title="Frequently asked questions"
         description="Clear answers to help you feel informed and at ease. Can't find what you're looking for? We're always happy to help."
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "FAQ" }]}
+        variant="aesthetic"
       >
         <div className="flex flex-wrap gap-3">
           <Button asChild variant="accent" size="lg">
@@ -68,7 +84,7 @@ export default function FaqPage() {
       </PageHeader>
 
       <Section>
-        <div className="mx-auto max-w-3xl">
+        <div className="mx-auto max-w-3xl bg-clay-50 p-6 rounded-lg">
           <FaqSearch faqs={allFaqs} categories={faqCategories} />
         </div>
       </Section>

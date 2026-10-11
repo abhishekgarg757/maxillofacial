@@ -20,7 +20,7 @@ export default function DisclaimerPage() {
         breadcrumbs={[{ label: "Home", href: "/" }, { label: "Disclaimer" }]}
       />
       <Section>
-        <div className="prose prose-lg mx-auto max-w-3xl prose-headings:font-display prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-a:text-brand-700">
+        <div className="prose prose-lg mx-auto max-w-3xl prose-headings:font-display prose-headings:text-ink-900 prose-p:text-ink-700 prose-li:text-ink-700 prose-a:text-accent">
           <h2>General information only</h2>
           <p>
             All content on this website — including procedure descriptions,

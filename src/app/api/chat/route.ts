@@ -4,6 +4,7 @@ import {
   streamText,
   type UIMessage,
 } from "ai";
+import { z } from "zod";
 
 import { buildSystemPrompt } from "@/content/chat-system-prompt";
 import { getClientIp, rateLimit } from "@/lib/rate-limit";
@@ -14,9 +15,31 @@ const MODEL = "gemini-2.5-flash";
 const MAX_MESSAGES = 24;
 const MAX_CHARS_PER_MESSAGE = 2000;
 
-function textLength(message: UIMessage): number {
-  return (message.parts ?? []).reduce((sum, part) => {
-    if (part.type === "text") return sum + part.text.length;
+/**
+ * Shape of the body sent by the AI SDK useChat client. We re-validate here
+ * (defence in depth — the client already validates before send) so that a
+ * malformed payload returns 400 instead of crashing the stream mid-flight.
+ */
+const partSchema = z.object({
+  type: z.string(),
+  text: z.string().optional(),
+});
+
+const uiMessageSchema = z.object({
+  id: z.string(),
+  role: z.enum(["user", "assistant", "system"]),
+  parts: z.array(partSchema),
+});
+
+const bodySchema = z.object({
+  messages: z.array(uiMessageSchema).min(1).max(MAX_MESSAGES),
+});
+
+function textLength(message: z.infer<typeof uiMessageSchema>): number {
+  return message.parts.reduce((sum, part) => {
+    if (part.type === "text" && typeof part.text === "string") {
+      return sum + part.text.length;
+    }
     return sum;
   }, 0);
 }
@@ -50,16 +73,16 @@ export async function POST(req: Request) {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const messages = (body as { messages?: unknown }).messages;
-  if (!Array.isArray(messages) || messages.length === 0) {
-    return Response.json({ error: "No messages provided." }, { status: 400 });
-  }
-  if (messages.length > MAX_MESSAGES) {
-    return Response.json({ error: "Conversation too long." }, { status: 413 });
+  const parsed = bodySchema.safeParse(body);
+  if (!parsed.success) {
+    return Response.json(
+      { error: "Invalid request format." },
+      { status: 400 },
+    );
   }
 
-  const typedMessages = messages as UIMessage[];
-  for (const message of typedMessages) {
+  const { messages } = parsed.data;
+  for (const message of messages) {
     if (textLength(message) > MAX_CHARS_PER_MESSAGE) {
       return Response.json(
         { error: "Message is too long. Please shorten it." },
@@ -68,15 +91,26 @@ export async function POST(req: Request) {
     }
   }
 
-  const result = streamText({
-    model: google(MODEL),
-    system: buildSystemPrompt(),
-    messages: await convertToModelMessages(typedMessages),
-    temperature: 0.4,
-  });
+  try {
+    const result = streamText({
+      model: google(MODEL),
+      system: buildSystemPrompt(),
+      messages: await convertToModelMessages(messages as UIMessage[]),
+      temperature: 0.4,
+    });
 
-  return result.toUIMessageStreamResponse({
-    onError: () =>
-      "Sorry, something went wrong. Please try again, or contact the clinic directly.",
-  });
+    return result.toUIMessageStreamResponse({
+      onError: () =>
+        "Sorry, something went wrong. Please try again, or contact the clinic directly.",
+    });
+  } catch (err) {
+    console.error("[chat] streamText failed", err);
+    return Response.json(
+      {
+        error:
+          "Sorry, something went wrong. Please try again, or contact the clinic directly.",
+      },
+      { status: 500 },
+    );
+  }
 }
